@@ -1,0 +1,8 @@
+// Configuración para Cloudflare Workers: publica la página como sitio estático
+{
+  "name": "boffestuddio",
+  "compatibility_date": "2025-09-01",
+  "assets": {
+    "directory": "./"
+  }
+}
