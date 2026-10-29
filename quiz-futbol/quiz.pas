@@ -1,156 +1,174 @@
 program QuizFutbol;
 
+uses crt;
+
 var
-  opcion: integer;
-  resp: char;
+  opcion: char;
   puntos: integer;
+
+{ Espera a que el jugador apriete ENTER }
+procedure Pausa;
+begin
+  writeln;
+  textcolor(darkgray);
+  write('Presiona ENTER para seguir...');
+  readln;
+end;
+
+{ Limpia la pantalla y dibuja el titulo }
+procedure Titulo;
+begin
+  clrscr;
+  textcolor(lightgreen);
+  writeln('     _...----..._');
+  writeln('   ,''    |    ''.');
+  writeln('  /  \   |   /  \');
+  writeln(' |----O--+--O----|');
+  writeln('  \  /   |   \  /');
+  writeln('   ''.    |    .''');
+  writeln('     ''--...--''');
+  writeln;
+  textcolor(yellow);
+  writeln('  ==============================');
+  writeln('       QUIZ  DE  FUTBOL');
+  writeln('  ==============================');
+  writeln;
+end;
+
+{ Muestra una pregunta, lee la respuesta y suma si es correcta }
+procedure Preguntar(numero: integer; pregunta, opA, opB, opC: string;
+                    correcta: char; explicacion: string; var puntos: integer);
+var
+  resp: char;
+begin
+  textcolor(white);
+  writeln('Pregunta ', numero, ': ', pregunta);
+  textcolor(lightcyan);
+  writeln('   a) ', opA);
+  writeln('   b) ', opB);
+  writeln('   c) ', opC);
+
+  { Pide la respuesta hasta que sea a, b o c }
+  repeat
+    textcolor(white);
+    write('Tu respuesta: ');
+    readln(resp);
+    resp := upcase(resp);
+    if not (resp in ['A', 'B', 'C']) then
+    begin
+      textcolor(lightred);
+      writeln('Escribi a, b o c.');
+    end;
+  until resp in ['A', 'B', 'C'];
+
+  if resp = correcta then
+  begin
+    textcolor(lightgreen);
+    writeln('GOOOOL! Correcto!');
+    puntos := puntos + 1;
+  end
+  else
+  begin
+    textcolor(lightred);
+    writeln('Afuera! ', explicacion);
+  end;
+  writeln;
+end;
+
+{ Muestra el puntaje final con un mensaje segun el resultado }
+procedure Resultado(puntos: integer);
+begin
+  textcolor(yellow);
+  writeln('------------------------------');
+  writeln('  Resultado: ', puntos, ' de 3');
+  writeln('------------------------------');
+  case puntos of
+    3: begin textcolor(lightgreen); writeln('  Crack! Sos un enciclopedista del futbol.'); end;
+    2: begin textcolor(lightcyan);  writeln('  Muy bien! Te falto poquito.'); end;
+    1: begin textcolor(brown);      writeln('  Zafaste... hay que mirar mas futbol.'); end;
+    0: begin textcolor(lightred);   writeln('  Uff, a la B! Anda a ver mas partidos.'); end;
+  end;
+  Pausa;
+end;
 
 begin
   repeat
+    Titulo;
+    textcolor(white);
+    writeln('  1 - Copa Libertadores');
+    writeln('  2 - Liga Argentina');
+    writeln('  3 - Mundiales');
+    writeln('  4 - Salir');
     writeln;
-    writeln('===== QUIZ DE FUTBOL =====');
-    writeln('1 - Copa Libertadores');
-    writeln('2 - Liga Argentina');
-    writeln('3 - Mundiales');
-    writeln('4 - Salir');
-    write('Elegi una tematica: ');
+    write('  Elegi una tematica: ');
     readln(opcion);
 
     puntos := 0;
 
     case opcion of
-      1: begin
-           writeln;
-           writeln('--- COPA LIBERTADORES ---');
+      '1': begin
+             Titulo;
+             textcolor(lightmagenta);
+             writeln('--- COPA LIBERTADORES ---');
+             writeln;
+             Preguntar(1, 'Que club gano mas Copas Libertadores?',
+                       'Boca', 'Independiente', 'Penarol',
+                       'B', 'Era Independiente, con 7.', puntos);
+             Preguntar(2, 'Quien gano la final 2018 jugada en Madrid?',
+                       'River', 'Boca', 'Gremio',
+                       'A', 'Era River.', puntos);
+             Preguntar(3, 'Que equipo gano la Libertadores 2023?',
+                       'Palmeiras', 'Flamengo', 'Fluminense',
+                       'C', 'Era Fluminense.', puntos);
+             Resultado(puntos);
+           end;
 
-           writeln('1) Que club gano mas Copas Libertadores?');
-           writeln('   a) Boca   b) Independiente   c) Penarol');
-           write('Respuesta: ');
-           readln(resp);
-           if upcase(resp) = 'B' then
-           begin
-             writeln('Correcto!');
-             puntos := puntos + 1;
-           end
-           else
-             writeln('Incorrecto. Era Independiente.');
+      '2': begin
+             Titulo;
+             textcolor(lightblue);
+             writeln('--- LIGA ARGENTINA ---');
+             writeln;
+             Preguntar(1, 'Que club tiene mas titulos de liga en Argentina?',
+                       'Boca', 'River', 'Racing',
+                       'B', 'Era River.', puntos);
+             Preguntar(2, 'Quienes juegan el clasico de Avellaneda?',
+                       'Racing e Independiente', 'Lanus y Banfield', 'Boca y River',
+                       'A', 'Eran Racing e Independiente.', puntos);
+             Preguntar(3, 'A que equipo le dicen "El Ciclon"?',
+                       'Huracan', 'Velez', 'San Lorenzo',
+                       'C', 'Era San Lorenzo.', puntos);
+             Resultado(puntos);
+           end;
 
-           writeln('2) Quien gano la final 2018 jugada en Madrid?');
-           writeln('   a) River   b) Boca   c) Gremio');
-           write('Respuesta: ');
-           readln(resp);
-           if upcase(resp) = 'A' then
-           begin
-             writeln('Correcto!');
-             puntos := puntos + 1;
-           end
-           else
-             writeln('Incorrecto. Era River.');
+      '3': begin
+             Titulo;
+             textcolor(lightcyan);
+             writeln('--- MUNDIALES ---');
+             writeln;
+             Preguntar(1, 'Cuantos mundiales gano Argentina?',
+                       '2', '3', '4',
+                       'B', 'Son 3 (1978, 1986 y 2022).', puntos);
+             Preguntar(2, 'Donde se jugo el Mundial 2022?',
+                       'Rusia', 'Brasil', 'Qatar',
+                       'C', 'Fue en Qatar.', puntos);
+             Preguntar(3, 'Que seleccion gano mas mundiales?',
+                       'Brasil', 'Alemania', 'Italia',
+                       'A', 'Es Brasil, con 5.', puntos);
+             Resultado(puntos);
+           end;
 
-           writeln('3) Que equipo gano la Libertadores 2023?');
-           writeln('   a) Palmeiras   b) Flamengo   c) Fluminense');
-           write('Respuesta: ');
-           readln(resp);
-           if upcase(resp) = 'C' then
-           begin
-             writeln('Correcto!');
-             puntos := puntos + 1;
-           end
-           else
-             writeln('Incorrecto. Era Fluminense.');
-
-           writeln('Sacaste ', puntos, ' de 3.');
-         end;
-
-      2: begin
-           writeln;
-           writeln('--- LIGA ARGENTINA ---');
-
-           writeln('1) Que club tiene mas titulos de liga en Argentina?');
-           writeln('   a) Boca   b) River   c) Racing');
-           write('Respuesta: ');
-           readln(resp);
-           if upcase(resp) = 'B' then
-           begin
-             writeln('Correcto!');
-             puntos := puntos + 1;
-           end
-           else
-             writeln('Incorrecto. Era River.');
-
-           writeln('2) Quienes juegan el clasico de Avellaneda?');
-           writeln('   a) Racing e Independiente   b) Lanus y Banfield   c) Boca y River');
-           write('Respuesta: ');
-           readln(resp);
-           if upcase(resp) = 'A' then
-           begin
-             writeln('Correcto!');
-             puntos := puntos + 1;
-           end
-           else
-             writeln('Incorrecto. Eran Racing e Independiente.');
-
-           writeln('3) A que equipo le dicen "El Ciclon"?');
-           writeln('   a) Huracan   b) Velez   c) San Lorenzo');
-           write('Respuesta: ');
-           readln(resp);
-           if upcase(resp) = 'C' then
-           begin
-             writeln('Correcto!');
-             puntos := puntos + 1;
-           end
-           else
-             writeln('Incorrecto. Era San Lorenzo.');
-
-           writeln('Sacaste ', puntos, ' de 3.');
-         end;
-
-      3: begin
-           writeln;
-           writeln('--- MUNDIALES ---');
-
-           writeln('1) Cuantos mundiales gano Argentina?');
-           writeln('   a) 2   b) 3   c) 4');
-           write('Respuesta: ');
-           readln(resp);
-           if upcase(resp) = 'B' then
-           begin
-             writeln('Correcto!');
-             puntos := puntos + 1;
-           end
-           else
-             writeln('Incorrecto. Son 3 (1978, 1986 y 2022).');
-
-           writeln('2) Donde se jugo el Mundial 2022?');
-           writeln('   a) Rusia   b) Brasil   c) Qatar');
-           write('Respuesta: ');
-           readln(resp);
-           if upcase(resp) = 'C' then
-           begin
-             writeln('Correcto!');
-             puntos := puntos + 1;
-           end
-           else
-             writeln('Incorrecto. Fue en Qatar.');
-
-           writeln('3) Que seleccion gano mas mundiales?');
-           writeln('   a) Brasil   b) Alemania   c) Italia');
-           write('Respuesta: ');
-           readln(resp);
-           if upcase(resp) = 'A' then
-           begin
-             writeln('Correcto!');
-             puntos := puntos + 1;
-           end
-           else
-             writeln('Incorrecto. Es Brasil, con 5.');
-
-           writeln('Sacaste ', puntos, ' de 3.');
-         end;
-
-      4: writeln('Chau!');
+      '4': begin
+             textcolor(yellow);
+             writeln;
+             writeln('  Gracias por jugar! Chau!');
+           end;
     else
-      writeln('Opcion invalida.');
+      begin
+        textcolor(lightred);
+        writeln('  Opcion invalida. Elegi 1, 2, 3 o 4.');
+        Pausa;
+      end;
     end;
-  until opcion = 4;
+  until opcion = '4';
+  textcolor(lightgray);
 end.
