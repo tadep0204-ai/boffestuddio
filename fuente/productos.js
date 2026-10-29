@@ -38,10 +38,11 @@ const CONFIG = {
 
 /* Las opciones de la portada y los filtros del catálogo */
 const FILTROS = [
-  { id: "hombre", nombre: "Hombre", bajada: "Perfumes masculinos" },
-  { id: "mujer",  nombre: "Mujer",  bajada: "Perfumes femeninos" },
-  { id: "unisex", nombre: "Unisex", bajada: "Para todos" },
-  { id: "varios", nombre: "Varios", bajada: "Accesorios y más" },
+  // portada: la línea chica que va arriba del nombre en la página principal
+  { id: "hombre", nombre: "Hombre", portada: "Perfumes", bajada: "Perfumes masculinos" },
+  { id: "mujer",  nombre: "Mujer",  portada: "Perfumes", bajada: "Perfumes femeninos" },
+  { id: "unisex", nombre: "Unisex", portada: "Perfumes", bajada: "Para todos" },
+  { id: "varios", nombre: "Varios", portada: "Accesorios y más", bajada: "Accesorios y más" },
 ];
 
 const PRODUCTOS = [
@@ -181,7 +182,7 @@ const PRODUCTOS = [
   { id: "lattafa-hayaati-black", marca: "Lattafa", nombre: "Hayaati Black", genero: "hombre", foto: "img/lattafa-hayaati-black.jpg" },
   { id: "lattafa-hayaati-florence-edp", marca: "Lattafa", nombre: "Hayaati Florence EDP", genero: "mujer", foto: "img/lattafa-hayaati-florence-edp.jpg" },
   { id: "lattafa-hayaati-gold", marca: "Lattafa", nombre: "Hayaati Gold", genero: "unisex", foto: "img/lattafa-hayaati-gold.jpg" },
-  { id: "lattafa-hayaati-maleky-caja-azul", marca: "Lattafa", nombre: "Hayaati Maleky (caja azul)", genero: "hombre", foto: "" },
+  { id: "lattafa-hayaati-maleky-caja-azul", marca: "Lattafa", nombre: "Hayaati Maleky (caja azul)", genero: "hombre", foto: "img/lattafa-hayaati-maleky-caja-azul.jpg" },
   { id: "lattafa-her-confession", marca: "Lattafa", nombre: "Her Confession", genero: "mujer", foto: "img/lattafa-her-confession.jpg" },
   { id: "lattafa-his-confession", marca: "Lattafa", nombre: "His Confession", genero: "hombre", foto: "img/lattafa-his-confession.jpg" },
   { id: "lattafa-honor-glory-bade-e-al-oud", marca: "Lattafa", nombre: "Honor & Glory Bade'e Al Oud", genero: "unisex", foto: "img/lattafa-honor-glory-bade-e-al-oud.jpg", destacado: true },
@@ -280,7 +281,7 @@ const PRODUCTOS = [
   { id: "al-wataniah-sabah-al-ward", marca: "Al Wataniah", nombre: "Sabah Al Ward", genero: "mujer", foto: "img/al-wataniah-sabah-al-ward.jpg" },
 
   /* Otros */
-  { id: "otros-stallion-valentino-uomo-intense", marca: "Otros", nombre: "Stallion Valentino Uomo Intense", genero: "hombre", foto: "" },
+  { id: "otros-stallion-valentino-uomo-intense", marca: "Otros", nombre: "Stallion Valentino Uomo Intense", genero: "hombre", foto: "img/otros-stallion-valentino-uomo-intense.jpg" },
 
   /* Emper */
   { id: "emper-stallion-53", marca: "Emper", nombre: "Stallion 53", genero: "unisex", foto: "img/emper-stallion-53.jpg" },
@@ -334,6 +335,15 @@ const PRODUCTOS = [
   /* Yves Saint Laurent */
   { id: "yves-saint-laurent-myslf", marca: "Yves Saint Laurent", nombre: "MYSLF", genero: "hombre", foto: "img/yves-saint-laurent-myslf.jpg" },
 
+  /* Victoria's Secret */
+  { id: "victoria-s-secret-love-spell", marca: "Victoria's Secret", nombre: "Love Spell", contenido: "Fragrance Mist 250 ml", genero: "mujer", foto: "img/victoria-s-secret-love-spell.jpg" },
+  { id: "victoria-s-secret-midnight-bloom", marca: "Victoria's Secret", nombre: "Midnight Bloom", contenido: "Fragrance Mist 250 ml", genero: "mujer", foto: "img/victoria-s-secret-midnight-bloom.jpg" },
+  { id: "victoria-s-secret-pure-seduction", marca: "Victoria's Secret", nombre: "Pure Seduction", contenido: "Fragrance Mist 250 ml", genero: "mujer", foto: "img/victoria-s-secret-pure-seduction.jpg" },
+  { id: "victoria-s-secret-amber-romance", marca: "Victoria's Secret", nombre: "Amber Romance", contenido: "Fragrance Mist 250 ml", genero: "mujer", foto: "img/victoria-s-secret-amber-romance.jpg" },
+  { id: "victoria-s-secret-temptation", marca: "Victoria's Secret", nombre: "Temptation", contenido: "Fragrance Mist 250 ml", genero: "mujer", foto: "img/victoria-s-secret-temptation.jpg" },
+  { id: "victoria-s-secret-bare-vanilla", marca: "Victoria's Secret", nombre: "Bare Vanilla", contenido: "Fragrance Mist 250 ml", genero: "mujer", foto: "img/victoria-s-secret-bare-vanilla.jpg" },
+  { id: "victoria-s-secret-coconut-passion", marca: "Victoria's Secret", nombre: "Coconut Passion", contenido: "Fragrance Mist 250 ml", genero: "mujer", foto: "img/victoria-s-secret-coconut-passion.jpg" },
+
   /* ---------------- VARIOS (no son perfumes) ---------------- */
   { id: "varios-auriculares-pro", categoria: "varios", marca: "Accesorios", nombre: "Auriculares inalámbricos tipo AirPods Pro", foto: "img/varios-auriculares-pro.jpg", destacado: true,
     descripcion: "Auriculares inalámbricos con estuche de carga. Consultá modelos disponibles." },
@@ -343,6 +353,4 @@ const PRODUCTOS = [
     descripcion: "Batería portátil magnética que se pega atrás del iPhone. Consultá compatibilidad con tu modelo." },
   { id: "varios-fundas-silicona-iphone", categoria: "varios", marca: "Accesorios", nombre: "Fundas de silicona para iPhone", foto: "img/varios-fundas-silicona-iphone.jpg", destacado: true,
     descripcion: "Fundas de silicona en muchos colores. Consultá por tu modelo de iPhone y los colores disponibles." },
-  { id: "karseell-maca-power-collagen", categoria: "varios", marca: "Karseell", nombre: "Maca Power Collagen", foto: "" },
-  { id: "karseell-combo", categoria: "varios", marca: "Karseell", nombre: "Combo Karseell", foto: "" },
 ];

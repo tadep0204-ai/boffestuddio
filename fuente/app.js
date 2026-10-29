@@ -340,8 +340,8 @@
         (f) => `
         <a href="#${f.id}" class="portada-opcion">
           <span class="portada-icono">${iconoFiltro(f.id)}</span>
+          <span class="portada-opcion-antes">${escapar(f.portada || "")}</span>
           <span class="portada-opcion-nombre">${escapar(f.nombre)}</span>
-          <span class="portada-opcion-bajada">${escapar(f.bajada || "")}</span>
         </a>`
       )
       .join('<span class="portada-separador" aria-hidden="true"><span>✦</span></span>');
@@ -611,7 +611,7 @@
     $("[data-velo]").classList.remove("visible");
     $("[data-menu]")?.classList.remove("abierto");
 
-    if (enPortada) document.title = `${CONFIG.nombre} · Perfumes`;
+    if (enPortada) document.title = `${CONFIG.nombre} · Productos`;
     if (vista === "catalogo") mostrarCatalogo(h);
     if (vista === "producto") mostrarProducto(idProducto);
     window.scrollTo(0, 0);

@@ -207,6 +207,16 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round
   transition: color .25s;
 }
 
+.portada-opcion-antes {
+  margin-bottom: -6px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .32em;
+  margin-right: -.32em;
+  text-transform: uppercase;
+  color: var(--dorado);
+}
+
 .portada-opcion-bajada {
   font-size: 11px;
   letter-spacing: .28em;
@@ -258,6 +268,7 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round
   .portada-icono svg { width: 52px; height: 52px; }
   .portada-opcion-nombre { font-size: 15px; letter-spacing: .3em; margin-right: -.3em; }
   .portada-opcion-bajada { font-size: 9px; letter-spacing: .2em; }
+  .portada-opcion-antes { font-size: 9px; letter-spacing: .24em; margin-right: -.24em; margin-bottom: -4px; }
 }
 
 /* =========================================================
