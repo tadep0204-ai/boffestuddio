@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BoffeStuddio · Perfumes</title>
+  <meta name="description" content="Perfumería, accesorios e indumentaria. Ubicados en La Plata, envíos a todo el país. Pedidos por WhatsApp o Instagram.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+/*CSS*/
+  </style>
+</head>
+<body class="portada-body">
+
+  <!-- =====================================================
+       PORTADA — estilo historia, solo las 3 opciones
+       ===================================================== -->
+  <main id="vista-portada" class="portada marco">
+    <div class="divisor"><span>✦</span></div>
+
+    <h1 class="portada-titulo">Perfumes</h1>
+    <p class="portada-bajada">Elegí tu estilo</p>
+
+    <div class="divisor divisor-corto"><span>✦</span></div>
+
+    <nav class="portada-opciones" data-opciones aria-label="Elegí una opción"></nav>
+
+    <div class="divisor"><span>✦</span></div>
+
+    <p class="portada-marca">BOFFESTUDDIO</p>
+  </main>
+
+  <!-- =====================================================
+       TIENDA — catálogo y ficha de producto
+       ===================================================== -->
+  <div id="vista-tienda" hidden>
+
+    <div class="anuncio">
+      <span>Envíos a todo el país</span>
+      <span class="anuncio-sep">✦</span>
+      <span>Efectivo o transferencia</span>
+      <span class="anuncio-sep">✦</span>
+      <span>Pedidos por WhatsApp o MD</span>
+    </div>
+
+    <header class="header">
+      <div class="header-inner">
+        <button class="btn-icono menu-toggle" aria-label="Abrir menú" data-menu-toggle>
+          <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+
+        <a href="#inicio" class="logo">
+          <span class="logo-monograma">BS</span>
+          <span class="logo-texto">BOFFESTUDDIO</span>
+        </a>
+
+        <nav class="nav" data-menu>
+          <a href="#inicio">Inicio</a>
+          <a href="#hombre">Hombre</a>
+          <a href="#mujer">Mujer</a>
+          <a href="#unisex">Unisex</a>
+          <a href="#varios">Varios</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+
+        <button class="btn-icono carrito-btn" aria-label="Abrir carrito" data-carrito-abrir>
+          <svg viewBox="0 0 24 24"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+          <span class="carrito-contador" data-carrito-contador>0</span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- Catálogo -->
+      <div data-vista-catalogo hidden>
+        <section class="seccion">
+          <div class="seccion-titulo">
+            <div class="divisor"><span>✦</span></div>
+            <h1 class="catalogo-titulo" data-catalogo-titulo>Catálogo</h1>
+            <p class="eyebrow" data-catalogo-bajada>Las mejores marcas al mejor precio</p>
+          </div>
+
+          <div class="filtros">
+            <div class="chips" data-chips></div>
+            <div class="filtros-derecha">
+              <input type="search" class="buscador" placeholder="Buscar producto…" data-buscador>
+              <select class="orden" data-marca aria-label="Marca"></select>
+              <select class="orden" data-orden aria-label="Ordenar">
+                <option value="relevancia">Destacados</option>
+                <option value="precio-asc">Menor precio</option>
+                <option value="precio-desc">Mayor precio</option>
+                <option value="nombre">A – Z</option>
+              </select>
+            </div>
+          </div>
+
+          <p class="resultados" data-cantidad-resultados></p>
+          <div class="grilla" data-grilla-catalogo></div>
+          <div class="ver-mas-caja"><button class="btn btn-secundario" data-ver-mas hidden>Ver más</button></div>
+          <p class="vacio" data-vacio hidden>No encontramos productos acá todavía. <a href="#" data-wa-link>Consultanos por WhatsApp</a>.</p>
+        </section>
+
+        <section class="seccion seccion-alt">
+          <div class="seccion-titulo">
+            <div class="divisor"><span>✦</span></div>
+            <h2>Cómo comprar</h2>
+            <p class="eyebrow">Simple y rápido</p>
+          </div>
+          <ol class="pasos">
+            <li>
+              <span class="paso-num">01</span>
+              <h3>Elegí</h3>
+              <p>Agregá al carrito los perfumes que te gusten.</p>
+            </li>
+            <li>
+              <span class="paso-num">02</span>
+              <h3>Enviá tu pedido</h3>
+              <p>Desde el carrito nos llega tu pedido armado por WhatsApp o MD.</p>
+            </li>
+            <li>
+              <span class="paso-num">03</span>
+              <h3>Pagá y recibí</h3>
+              <p>Te confirmamos precio y stock. Efectivo o transferencia, envíos a todo el país.</p>
+            </li>
+          </ol>
+        </section>
+      </div>
+
+      <!-- Ficha de producto -->
+      <div data-vista-producto hidden>
+        <section class="producto" data-producto></section>
+
+        <section class="seccion seccion-alt" data-relacionados-seccion>
+          <div class="seccion-titulo">
+            <div class="divisor"><span>✦</span></div>
+            <h2>También te puede gustar</h2>
+          </div>
+          <div class="grilla" data-grilla-relacionados></div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer" id="contacto">
+      <div class="footer-marco marco">
+        <div class="divisor"><span>✦</span></div>
+        <p class="footer-marca">BOFFESTUDDIO</p>
+        <p class="footer-sub">Perfumería · Accesorios · Indumentaria</p>
+        <ul class="footer-datos">
+          <li>Ubicados en <span data-ciudad>La Plata</span></li>
+          <li>Envíos a todo Argentina</li>
+          <li><a href="#" data-wa-link>WhatsApp <span data-telefono>221 400-1869</span></a></li>
+          <li><a href="#" data-ig-link>Instagram @<span data-ig>boffestuddio</span></a></li>
+        </ul>
+        <div class="divisor divisor-corto"><span>✦</span></div>
+        <p class="footer-copy">© <span data-anio></span> BoffeStuddio. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+/*PRODUCTOS*/
+  </script>
+  <script>
+/*JS*/
+  </script>
+</body>
+</html>

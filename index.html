@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BoffeStuddio · Perfumes</title>
+  <meta name="description" content="Perfumería, accesorios e indumentaria. Ubicados en La Plata, envíos a todo el país. Pedidos por WhatsApp o Instagram.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+/* =========================================================
+   BOFFESTUDDIO · ESTILOS
+   Paleta y tipografías tomadas de las historias de Instagram:
+   fondo crema, texto verde oliva oscuro, detalles dorados.
+   ========================================================= */
+
+:root {
+  --crema: #F4EEE4;
+  --crema-2: #ECE4D6;
+  --papel: #FAF6EF;
+  --oliva: #3F3B1D;
+  --oliva-2: #5B5735;
+  --gris: #7C775E;
+  --dorado: #B39556;
+  --linea: #CFC09A;
+  --marco: #8C866B;
+
+  --serif: "Playfair Display", "Times New Roman", serif;
+  --sans: "Raleway", "Helvetica Neue", Arial, sans-serif;
+
+  --ancho: 1200px;
+  color-scheme: light;
+  --radio: 2px;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  color: var(--oliva);
+  background: var(--crema);
+  /* textura de papel suave, como en las historias */
+  background-image:
+    radial-gradient(ellipse at 20% 0%, rgba(255, 255, 255, .55), transparent 60%),
+    radial-gradient(ellipse at 100% 100%, rgba(214, 200, 170, .25), transparent 55%);
+  background-attachment: fixed;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+button { font: inherit; color: inherit; cursor: pointer; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 400; margin: 0; line-height: 1.1; }
+[hidden] { display: none !important; }
+
+svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------------- Elementos del estilo ---------------- */
+
+/* Marco con esquinas (los corchetes de las historias) */
+.marco {
+  --l: 56px;
+  --g: 1.5px;
+  background:
+    linear-gradient(var(--marco), var(--marco)) top left / var(--l) var(--g) no-repeat,
+    linear-gradient(var(--marco), var(--marco)) top left / var(--g) var(--l) no-repeat,
+    linear-gradient(var(--marco), var(--marco)) top right / var(--l) var(--g) no-repeat,
+    linear-gradient(var(--marco), var(--marco)) top right / var(--g) var(--l) no-repeat,
+    linear-gradient(var(--marco), var(--marco)) bottom left / var(--l) var(--g) no-repeat,
+    linear-gradient(var(--marco), var(--marco)) bottom left / var(--g) var(--l) no-repeat,
+    linear-gradient(var(--marco), var(--marco)) bottom right / var(--l) var(--g) no-repeat,
+    linear-gradient(var(--marco), var(--marco)) bottom right / var(--g) var(--l) no-repeat;
+}
+
+/* Línea dorada con estrellita en el medio */
+.divisor {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  color: var(--dorado);
+}
+.divisor::before,
+.divisor::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--linea);
+}
+.divisor > span { font-size: 15px; line-height: 1; }
+.divisor-corto { max-width: 320px; }
+
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--gris);
+  margin: 0;
+}
+
+/* ---------------- Botones ---------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border: 1px solid var(--oliva);
+  border-radius: var(--radio);
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background .25s, color .25s, border-color .25s;
+}
+.btn-primario { background: var(--oliva); color: var(--papel); }
+.btn-primario:hover { background: var(--oliva-2); border-color: var(--oliva-2); }
+.btn-secundario { background: transparent; color: var(--oliva); }
+.btn-secundario:hover { background: var(--oliva); color: var(--papel); }
+.btn-chico { padding: 11px 16px; font-size: 11px; letter-spacing: .16em; width: 100%; }
+.btn-ancho { width: 100%; }
+
+.btn-icono {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  background: transparent;
+  position: relative;
+}
+.btn-icono svg { width: 24px; height: 24px; }
+
+/* =========================================================
+   PORTADA (index.html) — estilo historia, solo 3 opciones
+   ========================================================= */
+
+.portada-body { min-height: 100vh; min-height: 100svh; padding: 24px; display: flex; }
+
+.portada {
+  --l: 70px;
+  flex: 1;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(36px, 7vh, 72px) clamp(20px, 5vw, 64px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(20px, 3.5vh, 36px);
+  text-align: center;
+}
+
+.portada-titulo {
+  font-size: clamp(64px, 13vw, 150px);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -.01em;
+  line-height: .95;
+  color: var(--oliva);
+}
+
+.portada-bajada {
+  margin: -8px 0 0;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .4em;
+  text-transform: uppercase;
+  color: var(--oliva-2);
+}
+
+.portada-opciones {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+  max-width: 1040px;
+}
+
+.portada-opcion {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 28px 12px;
+  text-decoration: none;
+  color: var(--oliva);
+  transition: transform .3s ease;
+}
+.portada-opcion:hover { transform: translateY(-4px); }
+.portada-opcion:hover .portada-opcion-nombre { color: var(--dorado); }
+
+.portada-icono svg { width: 92px; height: 92px; stroke-width: 1.4; }
+
+.portada-opcion-nombre {
+  font-family: var(--sans);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: .38em;
+  margin-right: -.38em; /* compensa el espaciado para que quede centrado */
+  text-transform: uppercase;
+  transition: color .25s;
+}
+
+.portada-opcion-bajada {
+  font-size: 11px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--gris);
+}
+
+/* Separador vertical con estrellita (como "Métodos de pago") */
+.portada-separador {
+  position: relative;
+  width: 1px;
+  background: var(--linea);
+  margin: 10px 0;
+  flex: none;
+}
+.portada-separador > span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--crema);
+  color: var(--dorado);
+  padding: 6px 0;
+  font-size: 15px;
+  line-height: 1;
+}
+
+.portada-marca {
+  margin: 0;
+  font-size: clamp(18px, 2.4vw, 26px);
+  font-weight: 400;
+  letter-spacing: .5em;
+  margin-right: -.5em;
+  color: var(--oliva);
+}
+
+/* En la portada no mostramos el botón flotante: solo las 3 opciones */
+.portada-body .wa-flotante { display: none; }
+
+@media (max-width: 720px) {
+  .portada-body { padding: 14px; }
+  .portada { --l: 46px; gap: 16px; padding: 36px 18px; }
+  /* 4 opciones en grilla de 2 x 2, con líneas finas entre ellas */
+  .portada-opciones { display: grid; grid-template-columns: 1fr 1fr; max-width: 420px; }
+  .portada-separador { display: none; }
+  .portada-opcion { padding: 20px 6px; gap: 8px; }
+  .portada-opcion:nth-of-type(odd) { border-right: 1px solid var(--linea); }
+  .portada-opcion:nth-of-type(-n+2) { border-bottom: 1px solid var(--linea); }
+  .portada-icono svg { width: 52px; height: 52px; }
+  .portada-opcion-nombre { font-size: 15px; letter-spacing: .3em; margin-right: -.3em; }
+  .portada-opcion-bajada { font-size: 9px; letter-spacing: .2em; }
+}
+
+/* =========================================================
+   ENCABEZADO
+   ========================================================= */
+
+.anuncio {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  padding: 9px 16px;
+  background: var(--oliva);
+  color: var(--crema);
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+.anuncio-sep { color: var(--dorado); }
+
+.header {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 30;
+  background: rgba(244, 238, 228, .92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--linea);
+}
+.header-inner {
+  max-width: var(--ancho);
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo-monograma {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #141414;
+  color: #F4EEE4;
+  font-family: var(--serif);
+  font-size: 17px;
+  letter-spacing: -.04em;
+}
+.logo-texto { font-size: 15px; font-weight: 500; letter-spacing: .38em; }
+
+.nav { display: flex; gap: 28px; margin-left: auto; }
+.nav a {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 6px 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color .25s;
+}
+.nav a:hover { border-color: var(--dorado); }
+
+.menu-toggle { display: none; }
+
+.carrito-contador {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  background: var(--dorado);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  display: none;
+  place-items: center;
+}
+.carrito-contador.visible { display: grid; }
+
+@media (max-width: 860px) {
+  .header-inner { padding: 10px 16px; gap: 8px; }
+  .menu-toggle { display: inline-grid; }
+  .logo { margin: 0 auto; }
+  .logo-texto { font-size: 13px; letter-spacing: .3em; }
+  .logo-monograma { width: 38px; height: 38px; font-size: 15px; }
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: var(--crema);
+    border-bottom: 1px solid var(--linea);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .3s ease;
+  }
+  .nav.abierto { max-height: 400px; }
+  .nav a { padding: 16px 24px; border-bottom: 1px solid var(--crema-2); }
+}
+@media (max-width: 420px) {
+  .logo-texto { display: none; }
+}
+
+/* =========================================================
+   SECCIONES
+   ========================================================= */
+
+.seccion { max-width: var(--ancho); margin: 0 auto; padding: 64px 24px; }
+.seccion-alt { max-width: none; background: var(--crema-2); }
+.seccion-alt > * { max-width: calc(var(--ancho) - 48px); margin-left: auto; margin-right: auto; }
+
+.seccion-titulo { text-align: center; display: grid; gap: 14px; margin-bottom: 40px; }
+.seccion-titulo h2,
+.catalogo-titulo { font-size: clamp(40px, 6vw, 64px); text-transform: uppercase; }
+
+/* ---------------- Filtros ---------------- */
+
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  padding: 9px 16px;
+  border: 1px solid var(--linea);
+  border-radius: 40px;
+  background: transparent;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  transition: all .2s;
+}
+.chip:hover { border-color: var(--oliva); }
+.chip.activo { background: var(--oliva); border-color: var(--oliva); color: var(--papel); }
+
+.filtros-derecha { display: flex; gap: 8px; flex-wrap: wrap; }
+.buscador,
+.orden,
+.campo input {
+  padding: 10px 14px;
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  background: var(--papel);
+  font: inherit;
+  font-size: 14px;
+  color: var(--oliva);
+}
+.buscador { min-width: 220px; }
+.buscador:focus,
+.orden:focus,
+.campo input:focus { outline: 1px solid var(--dorado); border-color: var(--dorado); }
+
+@media (max-width: 600px) {
+  .filtros-derecha, .buscador { width: 100%; }
+  .buscador { min-width: 0; flex: 1 1 100%; }
+  .orden { flex: 1; min-width: 0; }
+}
+
+/* ---------------- Grilla de productos ---------------- */
+
+.grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 28px;
+}
+@media (max-width: 560px) {
+  .grilla { grid-template-columns: 1fr 1fr; gap: 14px; }
+}
+
+.tarjeta { display: flex; flex-direction: column; background: var(--papel); border: 1px solid #E6DCC8; }
+
+.tarjeta-img {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--crema);
+  display: block;
+}
+.tarjeta-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+.tarjeta:hover .tarjeta-img img,
+.tarjeta:hover .placeholder svg { transform: scale(1.05); }
+
+.tarjeta-img.con-foto { background: #fff; }
+.tarjeta-img.con-foto img { object-fit: contain; }
+.galeria-principal:has(img) { background-color: #fff; }
+.galeria-principal img { object-fit: contain !important; }
+.tarjeta-precio.a-consultar { font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gris); }
+.resultados { margin: -16px 0 18px; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--gris); }
+.ver-mas-caja { display: flex; justify-content: center; margin-top: 36px; }
+
+.placeholder { width: 100%; height: 100%; display: grid; place-items: center; color: var(--oliva); }
+.placeholder svg { width: 42%; height: 42%; stroke-width: 1.1; transition: transform .5s ease; }
+
+.etiqueta {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 5px 10px;
+  background: var(--oliva);
+  color: var(--crema);
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.tarjeta-cuerpo { padding: 18px 16px 18px; display: flex; flex-direction: column; gap: 4px; flex: 1; text-align: center; }
+.tarjeta-marca { margin: 0; font-size: 10px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; color: var(--gris); }
+.tarjeta-nombre { font-size: 21px; }
+.tarjeta-nombre a { text-decoration: none; }
+.tarjeta-detalle { margin: 0; font-size: 12px; color: var(--gris); }
+.tarjeta-precio { margin: 8px 0 14px; font-size: 17px; font-weight: 600; letter-spacing: .04em; margin-top: auto; padding-top: 10px; }
+
+@media (max-width: 560px) {
+  .tarjeta-cuerpo { padding: 12px 10px 14px; }
+  .tarjeta-nombre { font-size: 17px; }
+  .tarjeta-precio { font-size: 15px; }
+  .btn-chico { letter-spacing: .08em; padding: 10px 6px; }
+}
+
+.vacio { text-align: center; color: var(--gris); padding: 40px 0; }
+
+/* ---------------- Cómo comprar ---------------- */
+
+.pasos {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  text-align: center;
+}
+.pasos li { padding: 8px 28px; }
+.pasos li + li { border-left: 1px solid var(--linea); }
+.paso-num { font-family: var(--serif); font-size: 40px; color: var(--dorado); }
+.pasos h3 { font-family: var(--sans); font-size: 14px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; margin: 8px 0; }
+.pasos p { margin: 0; color: var(--oliva-2); font-size: 15px; }
+@media (max-width: 720px) {
+  .pasos { grid-template-columns: 1fr; gap: 24px; }
+  .pasos li + li { border-left: 0; border-top: 1px solid var(--linea); padding-top: 28px; }
+}
+
+/* =========================================================
+   FICHA DE PRODUCTO
+   ========================================================= */
+
+.producto { max-width: var(--ancho); margin: 0 auto; padding: 28px 24px 64px; }
+
+.migas { display: flex; flex-wrap: wrap; gap: 8px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--gris); margin-bottom: 28px; }
+.migas a { text-decoration: none; }
+.migas a:hover { color: var(--oliva); }
+
+.producto-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: start; }
+@media (max-width: 860px) { .producto-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+.galeria { position: sticky; top: 100px; }
+@media (max-width: 860px) { .galeria { position: static; } }
+.galeria-principal {
+  --l: 44px;
+  aspect-ratio: 1 / 1;
+  padding: 22px;
+  background-color: var(--papel);
+}
+.galeria-principal img { width: 100%; height: 100%; object-fit: cover; }
+.galeria-principal .placeholder svg { width: 46%; height: 46%; }
+.galeria-miniaturas { display: flex; gap: 10px; margin-top: 12px; }
+.miniatura { width: 76px; height: 76px; padding: 0; border: 1px solid var(--linea); background: var(--papel); overflow: hidden; }
+.miniatura.activa { border-color: var(--oliva); }
+.miniatura img { width: 100%; height: 100%; object-fit: cover; }
+
+.ficha { display: flex; flex-direction: column; gap: 14px; }
+.ficha-titulo { font-size: clamp(36px, 5vw, 52px); }
+.ficha-titulo span { display: block; margin-top: 8px; font-family: var(--sans); font-size: 14px; letter-spacing: .3em; text-transform: uppercase; color: var(--gris); }
+.ficha-precio { margin: 4px 0 0; font-size: 30px; font-weight: 500; letter-spacing: .02em; }
+.ficha-stock { margin: 0; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--dorado); }
+.ficha-stock.sin { color: #9a5b3c; }
+
+.ficha-caja { border: 1px solid var(--linea); background: var(--papel); margin: 8px 0; }
+.ficha-caja-fila { display: flex; gap: 16px; align-items: center; padding: 14px 18px; }
+.ficha-caja-fila + .ficha-caja-fila { border-top: 1px solid var(--crema-2); }
+.ficha-caja-fila svg { width: 34px; height: 34px; flex: none; color: var(--oliva); }
+.ficha-caja-fila strong { display: block; font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+.ficha-caja-fila span { font-size: 14px; color: var(--oliva-2); }
+
+.ficha-compra { display: flex; gap: 10px; }
+
+.cantidad { display: inline-flex; align-items: center; border: 1px solid var(--oliva); flex: none; }
+.cantidad button { width: 44px; height: 100%; min-height: 46px; border: 0; background: transparent; font-size: 18px; }
+.cantidad span { min-width: 28px; text-align: center; font-weight: 600; }
+.cantidad-chica button { min-height: 30px; width: 30px; font-size: 15px; }
+.cantidad-chica { border-color: var(--linea); margin-top: 6px; }
+
+.ficha-descripcion { margin-top: 24px; display: grid; gap: 14px; }
+.ficha-descripcion h2 { font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; margin-top: 10px; }
+.ficha-descripcion p { margin: 0; color: var(--oliva-2); font-size: 16px; }
+
+.notas { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--linea); }
+.notas li { display: grid; grid-template-columns: 110px 1fr; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--linea); color: var(--oliva-2); }
+.notas li span { font-family: var(--serif); font-size: 18px; color: var(--oliva); }
+
+.detalles { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; }
+.detalles div { border-bottom: 1px solid var(--crema-2); padding-bottom: 8px; }
+.detalles dt { font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--gris); }
+.detalles dd { margin: 2px 0 0; }
+
+.no-encontrado { text-align: center; display: grid; gap: 18px; justify-items: center; padding: 80px 0; }
+.no-encontrado h1 { font-size: 44px; }
+
+/* =========================================================
+   PIE
+   ========================================================= */
+
+.footer { padding: 48px 24px 36px; }
+.footer-marco { max-width: var(--ancho); margin: 0 auto; padding: 48px 24px; text-align: center; display: grid; gap: 14px; }
+.footer-marca { margin: 6px 0 0; font-size: 22px; letter-spacing: .5em; margin-right: -.5em; }
+.footer-sub { margin: 0; font-size: 12px; letter-spacing: .26em; text-transform: uppercase; color: var(--gris); }
+.footer-datos { list-style: none; margin: 10px 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 28px; font-size: 14px; }
+.footer-datos a { text-decoration: none; border-bottom: 1px solid var(--linea); }
+.footer-datos a:hover { border-color: var(--dorado); }
+.footer-copy { margin: 0; font-size: 12px; color: var(--gris); }
+
+/* =========================================================
+   CARRITO (panel lateral)
+   ========================================================= */
+
+.velo { position: fixed; inset: 0; background: rgba(40, 37, 18, .35); opacity: 0; pointer-events: none; transition: opacity .3s; z-index: 40; }
+.velo.visible { opacity: 1; pointer-events: auto; }
+
+.panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(420px, 100%);
+  background: var(--crema);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform .35s ease, visibility 0s .35s;
+}
+.panel.abierto {
+  transform: none;
+  visibility: visible;
+  transition: transform .35s ease;
+  box-shadow: -10px 0 40px rgba(40, 37, 18, .15);
+}
+
+.panel-cabecera { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--linea); }
+.panel-cabecera h2 { font-size: 26px; text-transform: uppercase; }
+
+.panel-items { flex: 1; overflow-y: auto; padding: 8px 20px; }
+.panel-vacio { text-align: center; padding: 60px 0; display: grid; gap: 16px; justify-items: center; color: var(--gris); }
+.panel-vacio .btn { width: auto; }
+
+.item { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--crema-2); }
+.item-img { width: 76px; height: 76px; flex: none; background: var(--papel); border: 1px solid var(--crema-2); overflow: hidden; }
+.item-img img { width: 100%; height: 100%; object-fit: cover; }
+.item-info p { margin: 0; }
+.item-nombre { font-family: var(--serif); font-size: 18px; }
+.item-precio { font-size: 14px; font-weight: 600; }
+
+.panel-pie { padding: 16px 20px 20px; border-top: 1px solid var(--linea); display: grid; gap: 12px; background: var(--papel); max-height: 62vh; overflow-y: auto; }
+.panel-total { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; }
+.panel-total strong { font-size: 22px; letter-spacing: .02em; }
+.panel-nota { margin: 0; font-size: 12px; color: var(--gris); text-align: center; }
+
+.campo { display: grid; gap: 6px; border: 0; padding: 0; margin: 0; }
+.campo > span,
+.campo legend { font-size: 10px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--gris); padding: 0; margin-bottom: 6px; }
+fieldset.campo { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+fieldset.campo legend { width: 100%; }
+.opcion { display: flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; }
+.opcion input { accent-color: var(--oliva); }
+
+/* ---------------- WhatsApp flotante y avisos ---------------- */
+
+.wa-flotante {
+  position: fixed;
+  right: calc(20px + env(safe-area-inset-right, 0px));
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--oliva);
+  color: var(--crema);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 6px 20px rgba(40, 37, 18, .25);
+  z-index: 35;
+  transition: transform .25s;
+}
+.wa-flotante:hover { transform: scale(1.06); }
+.wa-flotante svg { width: 28px; height: 28px; fill: currentColor; stroke: none; }
+
+.aviso {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translate(-50%, 20px);
+  padding: 12px 22px;
+  background: var(--oliva);
+  color: var(--crema);
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s, transform .3s;
+  z-index: 60;
+  white-space: nowrap;
+}
+.aviso.visible { opacity: 1; transform: translate(-50%, 0); }
+
+  </style>
+</head>
+<body class="portada-body">
+
+  <!-- =====================================================
+       PORTADA — estilo historia, solo las 3 opciones
+       ===================================================== -->
+  <main id="vista-portada" class="portada marco">
+    <div class="divisor"><span>✦</span></div>
+
+    <h1 class="portada-titulo">Perfumes</h1>
+    <p class="portada-bajada">Elegí tu estilo</p>
+
+    <div class="divisor divisor-corto"><span>✦</span></div>
+
+    <nav class="portada-opciones" data-opciones aria-label="Elegí una opción"></nav>
+
+    <div class="divisor"><span>✦</span></div>
+
+    <p class="portada-marca">BOFFESTUDDIO</p>
+  </main>
+
+  <!-- =====================================================
+       TIENDA — catálogo y ficha de producto
+       ===================================================== -->
+  <div id="vista-tienda" hidden>
+
+    <div class="anuncio">
+      <span>Envíos a todo el país</span>
+      <span class="anuncio-sep">✦</span>
+      <span>Efectivo o transferencia</span>
+      <span class="anuncio-sep">✦</span>
+      <span>Pedidos por WhatsApp o MD</span>
+    </div>
+
+    <header class="header">
+      <div class="header-inner">
+        <button class="btn-icono menu-toggle" aria-label="Abrir menú" data-menu-toggle>
+          <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+
+        <a href="#inicio" class="logo">
+          <span class="logo-monograma">BS</span>
+          <span class="logo-texto">BOFFESTUDDIO</span>
+        </a>
+
+        <nav class="nav" data-menu>
+          <a href="#inicio">Inicio</a>
+          <a href="#hombre">Hombre</a>
+          <a href="#mujer">Mujer</a>
+          <a href="#unisex">Unisex</a>
+          <a href="#varios">Varios</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+
+        <button class="btn-icono carrito-btn" aria-label="Abrir carrito" data-carrito-abrir>
+          <svg viewBox="0 0 24 24"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+          <span class="carrito-contador" data-carrito-contador>0</span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- Catálogo -->
+      <div data-vista-catalogo hidden>
+        <section class="seccion">
+          <div class="seccion-titulo">
+            <div class="divisor"><span>✦</span></div>
+            <h1 class="catalogo-titulo" data-catalogo-titulo>Catálogo</h1>
+            <p class="eyebrow" data-catalogo-bajada>Las mejores marcas al mejor precio</p>
+          </div>
+
+          <div class="filtros">
+            <div class="chips" data-chips></div>
+            <div class="filtros-derecha">
+              <input type="search" class="buscador" placeholder="Buscar producto…" data-buscador>
+              <select class="orden" data-marca aria-label="Marca"></select>
+              <select class="orden" data-orden aria-label="Ordenar">
+                <option value="relevancia">Destacados</option>
+                <option value="precio-asc">Menor precio</option>
+                <option value="precio-desc">Mayor precio</option>
+                <option value="nombre">A – Z</option>
+              </select>
+            </div>
+          </div>
+
+          <p class="resultados" data-cantidad-resultados></p>
+          <div class="grilla" data-grilla-catalogo></div>
+          <div class="ver-mas-caja"><button class="btn btn-secundario" data-ver-mas hidden>Ver más</button></div>
+          <p class="vacio" data-vacio hidden>No encontramos productos acá todavía. <a href="#" data-wa-link>Consultanos por WhatsApp</a>.</p>
+        </section>
+
+        <section class="seccion seccion-alt">
+          <div class="seccion-titulo">
+            <div class="divisor"><span>✦</span></div>
+            <h2>Cómo comprar</h2>
+            <p class="eyebrow">Simple y rápido</p>
+          </div>
+          <ol class="pasos">
+            <li>
+              <span class="paso-num">01</span>
+              <h3>Elegí</h3>
+              <p>Agregá al carrito los perfumes que te gusten.</p>
+            </li>
+            <li>
+              <span class="paso-num">02</span>
+              <h3>Enviá tu pedido</h3>
+              <p>Desde el carrito nos llega tu pedido armado por WhatsApp o MD.</p>
+            </li>
+            <li>
+              <span class="paso-num">03</span>
+              <h3>Pagá y recibí</h3>
+              <p>Te confirmamos precio y stock. Efectivo o transferencia, envíos a todo el país.</p>
+            </li>
+          </ol>
+        </section>
+      </div>
+
+      <!-- Ficha de producto -->
+      <div data-vista-producto hidden>
+        <section class="producto" data-producto></section>
+
+        <section class="seccion seccion-alt" data-relacionados-seccion>
+          <div class="seccion-titulo">
+            <div class="divisor"><span>✦</span></div>
+            <h2>También te puede gustar</h2>
+          </div>
+          <div class="grilla" data-grilla-relacionados></div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer" id="contacto">
+      <div class="footer-marco marco">
+        <div class="divisor"><span>✦</span></div>
+        <p class="footer-marca">BOFFESTUDDIO</p>
+        <p class="footer-sub">Perfumería · Accesorios · Indumentaria</p>
+        <ul class="footer-datos">
+          <li>Ubicados en <span data-ciudad>La Plata</span></li>
+          <li>Envíos a todo Argentina</li>
+          <li><a href="#" data-wa-link>WhatsApp <span data-telefono>221 400-1869</span></a></li>
+          <li><a href="#" data-ig-link>Instagram @<span data-ig>boffestuddio</span></a></li>
+        </ul>
+        <div class="divisor divisor-corto"><span>✦</span></div>
+        <p class="footer-copy">© <span data-anio></span> BoffeStuddio. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+/* =========================================================
+   BOFFESTUDDIO · DATOS DE LA TIENDA
+   ---------------------------------------------------------
+   Acá se cargan, editan o sacan productos. Cada perfume es
+   una línea con estos datos:
+
+   - marca, nombre
+   - genero: "hombre", "mujer" o "unisex"
+     (define en cuál de las opciones de la portada aparece)
+   - Los productos que no son perfumes llevan
+     categoria: "varios" en lugar de genero.
+   - foto: ruta a la foto dentro de la carpeta img/
+     (ej: "img/lattafa-khamrah.jpg"). Si queda "" se muestra
+     un dibujo de frasco.
+
+   Datos opcionales (se agregan dentro de las llaves):
+   - precio: 89990            → número sin puntos. Si no está,
+                                aparece "Consultar precio".
+   - stock: false             → muestra "Sin stock".
+   - destacado: true          → aparece primero en la lista.
+   - contenido: "100 ml"
+   - descripcion: "texto…"
+   - notas: { salida: "…", corazon: "…", fondo: "…" }
+
+   Ejemplo con todo:
+   { id: "lattafa-khamrah", marca: "Lattafa", nombre: "Khamrah",
+     genero: "unisex", foto: "img/lattafa-khamrah.jpg",
+     precio: 84990, contenido: "100 ml", destacado: true },
+   ========================================================= */
+
+const CONFIG = {
+  nombre: "BoffeStuddio",
+  whatsapp: "5492214001869",   // 54 9 + característica + número, sin espacios
+  telefonoVisible: "221 400-1869",
+  instagram: "boffestuddio",
+  ciudad: "La Plata",
+};
+
+/* Las opciones de la portada y los filtros del catálogo */
+const FILTROS = [
+  { id: "hombre", nombre: "Hombre", bajada: "Perfumes masculinos" },
+  { id: "mujer",  nombre: "Mujer",  bajada: "Perfumes femeninos" },
+  { id: "unisex", nombre: "Unisex", bajada: "Para todos" },
+  { id: "varios", nombre: "Varios", bajada: "Accesorios y más" },
+];
+
+const PRODUCTOS = [
+
+  /* Afnan */
+  { id: "afnan-9-am-pour-femme", marca: "Afnan", nombre: "9 AM Pour Femme", genero: "mujer", foto: "img/afnan-9-am-pour-femme.jpg" },
+  { id: "afnan-9-pm-elixir", marca: "Afnan", nombre: "9 PM Elixir", genero: "hombre", foto: "img/afnan-9-pm-elixir.jpg" },
+  { id: "afnan-9-pm-night-out-extract", marca: "Afnan", nombre: "9 PM Night Out Extract", genero: "hombre", foto: "img/afnan-9-pm-night-out-extract.jpg" },
+  { id: "afnan-9-am", marca: "Afnan", nombre: "9 AM", genero: "hombre", foto: "img/afnan-9-am.jpg" },
+  { id: "afnan-9-am-dive", marca: "Afnan", nombre: "9 AM Dive", genero: "unisex", foto: "img/afnan-9-am-dive.jpg" },
+  { id: "afnan-9-pm", marca: "Afnan", nombre: "9 PM", genero: "hombre", foto: "img/afnan-9-pm.jpg", destacado: true },
+  { id: "afnan-9-pm-pour-femme", marca: "Afnan", nombre: "9 PM Pour Femme", genero: "mujer", foto: "img/afnan-9-pm-pour-femme.jpg" },
+  { id: "afnan-9-pm-rebel", marca: "Afnan", nombre: "9 PM Rebel", genero: "unisex", foto: "img/afnan-9-pm-rebel.jpg" },
+  { id: "afnan-supremacy", marca: "Afnan", nombre: "Supremacy", genero: "hombre", foto: "img/afnan-supremacy.jpg" },
+  { id: "afnan-turathi-electric", marca: "Afnan", nombre: "Turathi Electric", genero: "unisex", foto: "img/afnan-turathi-electric.jpg" },
+  { id: "afnan-turathi-blue", marca: "Afnan", nombre: "Turathi Blue", genero: "hombre", foto: "img/afnan-turathi-blue.jpg" },
+
+  /* Al Haramain */
+  { id: "al-haramain-amber-oud-aqua-dubai", marca: "Al Haramain", nombre: "Amber Oud Aqua Dubai", genero: "unisex", foto: "img/al-haramain-amber-oud-aqua-dubai.jpg" },
+  { id: "al-haramain-amber-oud-dubai-night", marca: "Al Haramain", nombre: "Amber Oud Dubai Night", genero: "unisex", foto: "img/al-haramain-amber-oud-dubai-night.jpg" },
+  { id: "al-haramain-amber-oud-gold-edition", marca: "Al Haramain", nombre: "Amber Oud Gold Edition", genero: "unisex", foto: "img/al-haramain-amber-oud-gold-edition.jpg" },
+  { id: "al-haramain-amber-oud-rouge", marca: "Al Haramain", nombre: "Amber Oud Rouge", genero: "unisex", foto: "img/al-haramain-amber-oud-rouge.jpg" },
+
+  /* Armaf */
+  { id: "armaf-club-de-nuit-bling", marca: "Armaf", nombre: "Club de Nuit Bling", genero: "hombre", foto: "img/armaf-club-de-nuit-bling.jpg" },
+  { id: "armaf-club-de-nuit-iconic", marca: "Armaf", nombre: "Club de Nuit Iconic", genero: "hombre", foto: "img/armaf-club-de-nuit-iconic.jpg" },
+  { id: "armaf-club-de-nuit-intense-man", marca: "Armaf", nombre: "Club de Nuit Intense Man", genero: "hombre", foto: "img/armaf-club-de-nuit-intense-man.jpg", destacado: true },
+  { id: "armaf-club-de-nuit-maleka", marca: "Armaf", nombre: "Club de Nuit Maleka", genero: "mujer", foto: "img/armaf-club-de-nuit-maleka.jpg" },
+  { id: "armaf-club-de-nuit-milestone", marca: "Armaf", nombre: "Club de Nuit Milestone", genero: "unisex", foto: "img/armaf-club-de-nuit-milestone.jpg" },
+  { id: "armaf-club-de-nuit-oud-parfum", marca: "Armaf", nombre: "Club de Nuit Oud Parfum", genero: "unisex", foto: "img/armaf-club-de-nuit-oud-parfum.jpg" },
+  { id: "armaf-club-de-nuit-precieux", marca: "Armaf", nombre: "Club de Nuit Précieux", genero: "hombre", foto: "img/armaf-club-de-nuit-precieux.jpg" },
+  { id: "armaf-club-de-nuit-sillage", marca: "Armaf", nombre: "Club de Nuit Sillage", genero: "unisex", foto: "img/armaf-club-de-nuit-sillage.jpg" },
+  { id: "armaf-club-de-nuit-untold", marca: "Armaf", nombre: "Club de Nuit Untold", genero: "unisex", foto: "img/armaf-club-de-nuit-untold.jpg", destacado: true },
+  { id: "armaf-club-de-nuit-urban-man-elixir", marca: "Armaf", nombre: "Club de Nuit Urban Man Elixir", genero: "hombre", foto: "img/armaf-club-de-nuit-urban-man-elixir.jpg" },
+  { id: "armaf-club-de-nuit-woman", marca: "Armaf", nombre: "Club de Nuit Woman", genero: "mujer", foto: "img/armaf-club-de-nuit-woman.jpg" },
+  { id: "armaf-dunescape", marca: "Armaf", nombre: "Dunescape", genero: "unisex", foto: "" },
+  { id: "armaf-odyssey-mandarin-sky-elixir", marca: "Armaf", nombre: "Odyssey Mandarin Sky Elixir", genero: "hombre", foto: "img/armaf-odyssey-mandarin-sky-elixir.jpg" },
+  { id: "armaf-odyssey-aqua-100-ml", marca: "Armaf", nombre: "Odyssey Aqua 100 ml", genero: "hombre", foto: "img/armaf-odyssey-aqua-100-ml.jpg" },
+  { id: "armaf-odyssey-artisto", marca: "Armaf", nombre: "Odyssey Artisto", genero: "hombre", foto: "" },
+  { id: "armaf-odyssey-candee", marca: "Armaf", nombre: "Odyssey Candee", genero: "mujer", foto: "img/armaf-odyssey-candee.jpg" },
+  { id: "armaf-odyssey-homme", marca: "Armaf", nombre: "Odyssey Homme", genero: "hombre", foto: "img/armaf-odyssey-homme.jpg" },
+  { id: "armaf-odyssey-homme-white-edition", marca: "Armaf", nombre: "Odyssey Homme White Edition", genero: "hombre", foto: "img/armaf-odyssey-homme-white-edition.jpg" },
+  { id: "armaf-odyssey-limoni", marca: "Armaf", nombre: "Odyssey Limoni", genero: "unisex", foto: "img/armaf-odyssey-limoni.jpg" },
+  { id: "armaf-odyssey-mandarin-sky", marca: "Armaf", nombre: "Odyssey Mandarin Sky", genero: "hombre", foto: "img/armaf-odyssey-mandarin-sky.jpg", destacado: true },
+  { id: "armaf-odyssey-mandarin-sky-vintage", marca: "Armaf", nombre: "Odyssey Mandarin Sky Vintage", genero: "hombre", foto: "" },
+  { id: "armaf-odyssey-mega", marca: "Armaf", nombre: "Odyssey Mega", genero: "hombre", foto: "img/armaf-odyssey-mega.jpg" },
+  { id: "armaf-odyssey-revolution", marca: "Armaf", nombre: "Odyssey Revolution", genero: "hombre", foto: "img/armaf-odyssey-revolution.jpg" },
+  { id: "armaf-odyssey-spectra", marca: "Armaf", nombre: "Odyssey Spectra", genero: "unisex", foto: "img/armaf-odyssey-spectra.jpg" },
+  { id: "armaf-odyssey-tag-her-donna-colorata", marca: "Armaf", nombre: "Odyssey Tag Her Donna Colorata", genero: "mujer", foto: "" },
+  { id: "armaf-odyssey-tag-him-pour-homme", marca: "Armaf", nombre: "Odyssey Tag Him Pour Homme", genero: "hombre", foto: "" },
+  { id: "armaf-odyssey-tag-him-uomo-nero", marca: "Armaf", nombre: "Odyssey Tag Him Uomo Nero", genero: "hombre", foto: "" },
+  { id: "armaf-odyssey-tag-him-uomo-rosso", marca: "Armaf", nombre: "Odyssey Tag Him Uomo Rosso", genero: "hombre", foto: "" },
+  { id: "armaf-odyssey-tyrant", marca: "Armaf", nombre: "Odyssey Tyrant", genero: "hombre", foto: "img/armaf-odyssey-tyrant.jpg" },
+  { id: "armaf-yum-yum", marca: "Armaf", nombre: "Yum Yum", genero: "mujer", foto: "img/armaf-yum-yum.jpg" },
+
+  /* Armani */
+  { id: "armani-acqua-di-gio", marca: "Armani", nombre: "Acqua di Giò", genero: "hombre", foto: "" },
+  { id: "armani-armani-code", marca: "Armani", nombre: "Armani Code", genero: "hombre", foto: "" },
+
+  /* Azzaro */
+  { id: "azzaro-the-most-wanted-parfum", marca: "Azzaro", nombre: "The Most Wanted Parfum", genero: "hombre", foto: "img/azzaro-the-most-wanted-parfum.jpg" },
+
+  /* Bharara */
+  { id: "bharara-bharara-king", marca: "Bharara", nombre: "Bharara King", genero: "hombre", foto: "img/bharara-bharara-king.jpg" },
+  { id: "bharara-bharara-rose", marca: "Bharara", nombre: "Bharara Rose", genero: "mujer", foto: "img/bharara-bharara-rose.jpg" },
+
+  /* Calvin Klein */
+  { id: "calvin-klein-ck-one", marca: "Calvin Klein", nombre: "CK One", genero: "unisex", foto: "img/calvin-klein-ck-one.jpg" },
+
+  /* Carolina Herrera */
+  { id: "carolina-herrera-bad-boy", marca: "Carolina Herrera", nombre: "Bad Boy", genero: "hombre", foto: "img/carolina-herrera-bad-boy.jpg" },
+
+  /* Dior */
+  { id: "dior-sauvage", marca: "Dior", nombre: "Sauvage", genero: "hombre", foto: "img/dior-sauvage.jpg", destacado: true },
+
+  /* Emporio Armani */
+  { id: "emporio-armani-stronger-with-you-intensely", marca: "Emporio Armani", nombre: "Stronger With You Intensely", genero: "hombre", foto: "img/emporio-armani-stronger-with-you-intensely.jpg" },
+
+  /* French Avenue */
+  { id: "french-avenue-azzure-aoud", marca: "French Avenue", nombre: "Azzure Aoud", genero: "unisex", foto: "img/french-avenue-azzure-aoud.jpg" },
+  { id: "french-avenue-liquid-brun", marca: "French Avenue", nombre: "Liquid Brun", genero: "hombre", foto: "img/french-avenue-liquid-brun.jpg" },
+  { id: "french-avenue-spectre-ghost", marca: "French Avenue", nombre: "Spectre Ghost", genero: "hombre", foto: "img/french-avenue-spectre-ghost.jpg" },
+  { id: "french-avenue-veneno-negro", marca: "French Avenue", nombre: "Veneno (negro)", genero: "unisex", foto: "img/french-avenue-veneno-negro.jpg" },
+  { id: "french-avenue-veneno-blanco", marca: "French Avenue", nombre: "Veneno Blanco", genero: "unisex", foto: "img/french-avenue-veneno-blanco.jpg" },
+  { id: "french-avenue-veneno-scarlett", marca: "French Avenue", nombre: "Veneno Scarlett", genero: "mujer", foto: "img/french-avenue-veneno-scarlett.jpg" },
+  { id: "french-avenue-vulcan", marca: "French Avenue", nombre: "Vulcan", genero: "hombre", foto: "img/french-avenue-vulcan.jpg" },
+  { id: "french-avenue-vulcan-black-friday", marca: "French Avenue", nombre: "Vulcan Black Friday", genero: "hombre", foto: "img/french-avenue-vulcan-black-friday.jpg" },
+
+  /* Issey Miyake */
+  { id: "issey-miyake-l-eau-d-issey-pour-homme", marca: "Issey Miyake", nombre: "L'Eau d'Issey Pour Homme", genero: "hombre", foto: "img/issey-miyake-l-eau-d-issey-pour-homme.jpg" },
+
+  /* Jean Paul Gaultier */
+  { id: "jean-paul-gaultier-le-beau-le-parfum-125-ml", marca: "Jean Paul Gaultier", nombre: "Le Beau Le Parfum 125 ml", genero: "hombre", foto: "img/jean-paul-gaultier-le-beau-le-parfum-125-ml.jpg" },
+  { id: "jean-paul-gaultier-le-beau-paradise-garden", marca: "Jean Paul Gaultier", nombre: "Le Beau Paradise Garden", genero: "hombre", foto: "" },
+  { id: "jean-paul-gaultier-le-male-elixir", marca: "Jean Paul Gaultier", nombre: "Le Male Elixir", genero: "hombre", foto: "img/jean-paul-gaultier-le-male-elixir.jpg" },
+  { id: "jean-paul-gaultier-le-male-le-parfum-125-ml", marca: "Jean Paul Gaultier", nombre: "Le Male Le Parfum 125 ml", genero: "hombre", foto: "img/jean-paul-gaultier-le-male-le-parfum-125-ml.jpg" },
+  { id: "jean-paul-gaultier-scandal-intense-femme", marca: "Jean Paul Gaultier", nombre: "Scandal Intense Femme", genero: "mujer", foto: "img/jean-paul-gaultier-scandal-intense-femme.jpg" },
+  { id: "jean-paul-gaultier-scandal-le-parfum", marca: "Jean Paul Gaultier", nombre: "Scandal Le Parfum", genero: "hombre", foto: "img/jean-paul-gaultier-scandal-le-parfum.jpg" },
+
+  /* Lancôme */
+  { id: "lancome-la-vie-est-belle", marca: "Lancôme", nombre: "La Vie Est Belle", genero: "mujer", foto: "" },
+
+  /* Lattafa */
+  { id: "lattafa-afeef", marca: "Lattafa", nombre: "Afeef", genero: "unisex", foto: "" },
+  { id: "lattafa-ajwad", marca: "Lattafa", nombre: "Ajwad", genero: "unisex", foto: "img/lattafa-ajwad.jpg" },
+  { id: "lattafa-ajwad-pink", marca: "Lattafa", nombre: "Ajwad Pink", genero: "mujer", foto: "img/lattafa-ajwad-pink.jpg" },
+  { id: "lattafa-al-nashama", marca: "Lattafa", nombre: "Al Nashama", genero: "unisex", foto: "img/lattafa-al-nashama.jpg" },
+  { id: "lattafa-al-noble-safeer", marca: "Lattafa", nombre: "Al Noble Safeer", genero: "unisex", foto: "img/lattafa-al-noble-safeer.jpg" },
+  { id: "lattafa-al-noble-wazeer", marca: "Lattafa", nombre: "Al Noble Wazeer", genero: "unisex", foto: "img/lattafa-al-noble-wazeer.jpg" },
+  { id: "lattafa-al-qiam-gold", marca: "Lattafa", nombre: "Al Qiam Gold", genero: "unisex", foto: "img/lattafa-al-qiam-gold.jpg" },
+  { id: "lattafa-amethyst-bade-e-al-oud", marca: "Lattafa", nombre: "Amethyst Bade'e Al Oud", genero: "unisex", foto: "img/lattafa-amethyst-bade-e-al-oud.jpg" },
+  { id: "lattafa-ana-abiyedh", marca: "Lattafa", nombre: "Ana Abiyedh", genero: "unisex", foto: "img/lattafa-ana-abiyedh.jpg" },
+  { id: "lattafa-angham", marca: "Lattafa", nombre: "Angham", genero: "unisex", foto: "img/lattafa-angham.jpg" },
+  { id: "lattafa-ansaam-gold", marca: "Lattafa", nombre: "Ansaam Gold", genero: "unisex", foto: "" },
+  { id: "lattafa-art-of-universe", marca: "Lattafa", nombre: "Art of Universe", genero: "unisex", foto: "img/lattafa-art-of-universe.jpg" },
+  { id: "lattafa-asad-bourbon", marca: "Lattafa", nombre: "Asad Bourbon", genero: "hombre", foto: "img/lattafa-asad-bourbon.jpg" },
+  { id: "lattafa-asad-elixir", marca: "Lattafa", nombre: "Asad Elixir", genero: "hombre", foto: "img/lattafa-asad-elixir.jpg", destacado: true },
+  { id: "lattafa-asad-negro", marca: "Lattafa", nombre: "Asad Negro", genero: "hombre", foto: "img/lattafa-asad-negro.jpg" },
+  { id: "lattafa-asad-zanzibar", marca: "Lattafa", nombre: "Asad Zanzibar", genero: "hombre", foto: "img/lattafa-asad-zanzibar.jpg" },
+  { id: "lattafa-atlas", marca: "Lattafa", nombre: "Atlas", genero: "unisex", foto: "img/lattafa-atlas.jpg" },
+  { id: "lattafa-blue-sapphire", marca: "Lattafa", nombre: "Blue Sapphire", genero: "unisex", foto: "img/lattafa-blue-sapphire.jpg" },
+  { id: "lattafa-combo-asad", marca: "Lattafa", nombre: "Combo Asad", genero: "hombre", foto: "img/lattafa-combo-asad.jpg" },
+  { id: "lattafa-combo-mini-yara-25-ml", marca: "Lattafa", nombre: "Combo Mini Yara 25 ml", genero: "mujer", foto: "img/lattafa-combo-mini-yara-25-ml.jpg" },
+  { id: "lattafa-combo-mini-yara-5-ml", marca: "Lattafa", nombre: "Combo Mini Yara 5 ml", genero: "mujer", foto: "img/lattafa-combo-mini-yara-5-ml.jpg" },
+  { id: "lattafa-combo-yara-100-ml-x2", marca: "Lattafa", nombre: "Combo Yara 100 ml x2", genero: "mujer", foto: "img/lattafa-combo-yara-100-ml-x2.jpg" },
+  { id: "lattafa-confidential-private-gold", marca: "Lattafa", nombre: "Confidential Private Gold", genero: "unisex", foto: "img/lattafa-confidential-private-gold.jpg" },
+  { id: "lattafa-eclaire", marca: "Lattafa", nombre: "Eclaire", genero: "mujer", foto: "img/lattafa-eclaire.jpg", destacado: true },
+  { id: "lattafa-eclaire-banoffi", marca: "Lattafa", nombre: "Eclaire Banoffi", genero: "mujer", foto: "img/lattafa-eclaire-banoffi.jpg" },
+  { id: "lattafa-eclaire-pistacho", marca: "Lattafa", nombre: "Eclaire Pistacho", genero: "mujer", foto: "" },
+  { id: "lattafa-emaan", marca: "Lattafa", nombre: "Emaan", genero: "mujer", foto: "img/lattafa-emaan.jpg" },
+  { id: "lattafa-emeer", marca: "Lattafa", nombre: "Emeer", genero: "unisex", foto: "img/lattafa-emeer.jpg" },
+  { id: "lattafa-fakhar-gold", marca: "Lattafa", nombre: "Fakhar Gold", genero: "mujer", foto: "img/lattafa-fakhar-gold.jpg" },
+  { id: "lattafa-fakhar-negro-y-gris", marca: "Lattafa", nombre: "Fakhar Negro y Gris", genero: "hombre", foto: "img/lattafa-fakhar-negro-y-gris.jpg" },
+  { id: "lattafa-fakhar-platin", marca: "Lattafa", nombre: "Fakhar Platin", genero: "hombre", foto: "img/lattafa-fakhar-platin.jpg" },
+  { id: "lattafa-fakhar-rose", marca: "Lattafa", nombre: "Fakhar Rose", genero: "mujer", foto: "img/lattafa-fakhar-rose.jpg" },
+  { id: "lattafa-haya", marca: "Lattafa", nombre: "Haya", genero: "mujer", foto: "img/lattafa-haya.jpg" },
+  { id: "lattafa-hayaati-black", marca: "Lattafa", nombre: "Hayaati Black", genero: "hombre", foto: "img/lattafa-hayaati-black.jpg" },
+  { id: "lattafa-hayaati-florence-edp", marca: "Lattafa", nombre: "Hayaati Florence EDP", genero: "mujer", foto: "img/lattafa-hayaati-florence-edp.jpg" },
+  { id: "lattafa-hayaati-gold", marca: "Lattafa", nombre: "Hayaati Gold", genero: "unisex", foto: "" },
+  { id: "lattafa-hayaati-maleky-caja-azul", marca: "Lattafa", nombre: "Hayaati Maleky (caja azul)", genero: "hombre", foto: "" },
+  { id: "lattafa-her-confession", marca: "Lattafa", nombre: "Her Confession", genero: "mujer", foto: "img/lattafa-her-confession.jpg" },
+  { id: "lattafa-his-confession", marca: "Lattafa", nombre: "His Confession", genero: "hombre", foto: "img/lattafa-his-confession.jpg" },
+  { id: "lattafa-honor-glory-bade-e-al-oud", marca: "Lattafa", nombre: "Honor & Glory Bade'e Al Oud", genero: "unisex", foto: "img/lattafa-honor-glory-bade-e-al-oud.jpg", destacado: true },
+  { id: "lattafa-ishq-al-shuyukh-gold", marca: "Lattafa", nombre: "Ishq Al Shuyukh Gold", genero: "unisex", foto: "img/lattafa-ishq-al-shuyukh-gold.jpg" },
+  { id: "lattafa-ishq-al-shuyukh-silver", marca: "Lattafa", nombre: "Ishq Al Shuyukh Silver", genero: "unisex", foto: "img/lattafa-ishq-al-shuyukh-silver.jpg" },
+  { id: "lattafa-jasoor", marca: "Lattafa", nombre: "Jasoor", genero: "hombre", foto: "" },
+  { id: "lattafa-jouri", marca: "Lattafa", nombre: "Jouri", genero: "unisex", foto: "" },
+  { id: "lattafa-khamrah", marca: "Lattafa", nombre: "Khamrah", genero: "unisex", foto: "img/lattafa-khamrah.jpg", destacado: true },
+  { id: "lattafa-khamrah-dukhan", marca: "Lattafa", nombre: "Khamrah Dukhan", genero: "unisex", foto: "img/lattafa-khamrah-dukhan.jpg" },
+  { id: "lattafa-khamrah-qahwa", marca: "Lattafa", nombre: "Khamrah Qahwa", genero: "unisex", foto: "img/lattafa-khamrah-qahwa.jpg" },
+  { id: "lattafa-khamrah-waha", marca: "Lattafa", nombre: "Khamrah Waha", genero: "unisex", foto: "img/lattafa-khamrah-waha.jpg" },
+  { id: "lattafa-khanjar", marca: "Lattafa", nombre: "Khanjar", genero: "hombre", foto: "img/lattafa-khanjar.jpg" },
+  { id: "lattafa-liam-blue", marca: "Lattafa", nombre: "Liam Blue", genero: "hombre", foto: "img/lattafa-liam-blue.jpg" },
+  { id: "lattafa-maahir-black", marca: "Lattafa", nombre: "Maahir Black", genero: "unisex", foto: "img/lattafa-maahir-black.jpg" },
+  { id: "lattafa-maahir-gold", marca: "Lattafa", nombre: "Maahir Gold", genero: "unisex", foto: "img/lattafa-maahir-gold.jpg" },
+  { id: "lattafa-mayar-cherry", marca: "Lattafa", nombre: "Mayar Cherry", genero: "mujer", foto: "img/lattafa-mayar-cherry.jpg" },
+  { id: "lattafa-mayar-natural-intense", marca: "Lattafa", nombre: "Mayar Natural Intense", genero: "mujer", foto: "img/lattafa-mayar-natural-intense.jpg" },
+  { id: "lattafa-mayar-rosa", marca: "Lattafa", nombre: "Mayar Rosa", genero: "mujer", foto: "img/lattafa-mayar-rosa.jpg" },
+  { id: "lattafa-musamam-black-intense", marca: "Lattafa", nombre: "Musamam Black Intense", genero: "hombre", foto: "img/lattafa-musamam-black-intense.jpg" },
+  { id: "lattafa-musamam-white-intense", marca: "Lattafa", nombre: "Musamam White Intense", genero: "unisex", foto: "img/lattafa-musamam-white-intense.jpg" },
+  { id: "lattafa-mush-salama", marca: "Lattafa", nombre: "Mush Salama", genero: "unisex", foto: "img/lattafa-mush-salama.jpg" },
+  { id: "lattafa-nebras", marca: "Lattafa", nombre: "Nebras", genero: "unisex", foto: "img/lattafa-nebras.jpg" },
+  { id: "lattafa-nebras-elixir", marca: "Lattafa", nombre: "Nebras Elixir", genero: "unisex", foto: "" },
+  { id: "lattafa-niche-edition-ghinwa", marca: "Lattafa", nombre: "Niche Edition Ghinwa", genero: "unisex", foto: "" },
+  { id: "lattafa-niche-edition-khalid", marca: "Lattafa", nombre: "Niche Edition Khalid", genero: "unisex", foto: "" },
+  { id: "lattafa-niche-edition-lujain", marca: "Lattafa", nombre: "Niche Edition Lujain", genero: "unisex", foto: "" },
+  { id: "lattafa-niche-edition-toleen", marca: "Lattafa", nombre: "Niche Edition Toleen", genero: "unisex", foto: "" },
+  { id: "lattafa-niche-edition-zikra", marca: "Lattafa", nombre: "Niche Edition Zikra", genero: "unisex", foto: "" },
+  { id: "lattafa-noble-blush-bade-e-al-oud", marca: "Lattafa", nombre: "Noble Blush Bade'e Al Oud", genero: "mujer", foto: "img/lattafa-noble-blush-bade-e-al-oud.jpg" },
+  { id: "lattafa-opulent-dubai", marca: "Lattafa", nombre: "Opulent Dubai", genero: "unisex", foto: "img/lattafa-opulent-dubai.jpg" },
+  { id: "lattafa-opulent-musk", marca: "Lattafa", nombre: "Opulent Musk", genero: "unisex", foto: "img/lattafa-opulent-musk.jpg" },
+  { id: "lattafa-oud-for-glory-bade-e-al-oud", marca: "Lattafa", nombre: "Oud for Glory Bade'e Al Oud", genero: "unisex", foto: "img/lattafa-oud-for-glory-bade-e-al-oud.jpg" },
+  { id: "lattafa-pride-pisa", marca: "Lattafa", nombre: "Pride Pisa", genero: "unisex", foto: "img/lattafa-pride-pisa.jpg" },
+  { id: "lattafa-qaed-al-fursan", marca: "Lattafa", nombre: "Qaed Al Fursan", genero: "unisex", foto: "img/lattafa-qaed-al-fursan.jpg" },
+  { id: "lattafa-qaed-al-fursan-blanco", marca: "Lattafa", nombre: "Qaed Al Fursan Blanco", genero: "unisex", foto: "img/lattafa-qaed-al-fursan-blanco.jpg" },
+  { id: "lattafa-qimmah-men", marca: "Lattafa", nombre: "Qimmah Men", genero: "hombre", foto: "" },
+  { id: "lattafa-qimmah-women", marca: "Lattafa", nombre: "Qimmah Women", genero: "mujer", foto: "" },
+  { id: "lattafa-sakeena", marca: "Lattafa", nombre: "Sakeena", genero: "mujer", foto: "img/lattafa-sakeena.jpg" },
+  { id: "lattafa-sheikh-al-shuyukh-azul", marca: "Lattafa", nombre: "Sheikh Al Shuyukh Azul", genero: "hombre", foto: "img/lattafa-sheikh-al-shuyukh-azul.jpg" },
+  { id: "lattafa-shaheen-gold", marca: "Lattafa", nombre: "Shaheen Gold", genero: "hombre", foto: "" },
+  { id: "lattafa-sublime-bade-e-al-oud", marca: "Lattafa", nombre: "Sublime Bade'e Al Oud", genero: "unisex", foto: "img/lattafa-sublime-bade-e-al-oud.jpg" },
+  { id: "lattafa-taureau-de-combat", marca: "Lattafa", nombre: "Taureau de Combat", genero: "hombre", foto: "img/lattafa-taureau-de-combat.jpg" },
+  { id: "lattafa-teriaq", marca: "Lattafa", nombre: "Teriaq", genero: "unisex", foto: "img/lattafa-teriaq.jpg" },
+  { id: "lattafa-teriaq-intense", marca: "Lattafa", nombre: "Teriaq Intense", genero: "unisex", foto: "img/lattafa-teriaq-intense.jpg" },
+  { id: "lattafa-the-kingdom-beige-femenino", marca: "Lattafa", nombre: "The Kingdom Beige (femenino)", genero: "mujer", foto: "img/lattafa-the-kingdom-beige-femenino.jpg" },
+  { id: "lattafa-the-kingdom-blanc-masculino", marca: "Lattafa", nombre: "The Kingdom Blanc (masculino)", genero: "hombre", foto: "img/lattafa-the-kingdom-blanc-masculino.jpg" },
+  { id: "lattafa-victoria", marca: "Lattafa", nombre: "Victoria", genero: "mujer", foto: "img/lattafa-victoria.jpg" },
+  { id: "lattafa-vintage-radio", marca: "Lattafa", nombre: "Vintage Radio", genero: "unisex", foto: "img/lattafa-vintage-radio.jpg" },
+  { id: "lattafa-yara-candy", marca: "Lattafa", nombre: "Yara Candy", genero: "mujer", foto: "img/lattafa-yara-candy.jpg", destacado: true },
+  { id: "lattafa-yara-elixir", marca: "Lattafa", nombre: "Yara Elixir", genero: "mujer", foto: "img/lattafa-yara-elixir.jpg" },
+  { id: "lattafa-yara-moi", marca: "Lattafa", nombre: "Yara Moi", genero: "mujer", foto: "img/lattafa-yara-moi.jpg" },
+  { id: "lattafa-yara-rosa", marca: "Lattafa", nombre: "Yara Rosa", genero: "mujer", foto: "img/lattafa-yara-rosa.jpg" },
+  { id: "lattafa-yara-tous", marca: "Lattafa", nombre: "Yara Tous", genero: "mujer", foto: "img/lattafa-yara-tous.jpg", destacado: true },
+
+  /* Maison Alhambra */
+  { id: "maison-alhambra-tenderina", marca: "Maison Alhambra", nombre: "Tenderina", genero: "mujer", foto: "img/maison-alhambra-tenderina.jpg" },
+  { id: "maison-alhambra-athena", marca: "Maison Alhambra", nombre: "Athena", genero: "mujer", foto: "" },
+  { id: "maison-alhambra-delilah-blanc", marca: "Maison Alhambra", nombre: "Delilah Blanc", genero: "mujer", foto: "" },
+  { id: "maison-alhambra-glacier-bella", marca: "Maison Alhambra", nombre: "Glacier Bella", genero: "mujer", foto: "img/maison-alhambra-glacier-bella.jpg" },
+  { id: "maison-alhambra-glacier-le-noir", marca: "Maison Alhambra", nombre: "Glacier Le Noir", genero: "hombre", foto: "" },
+  { id: "maison-alhambra-jean-lowe-immortel", marca: "Maison Alhambra", nombre: "Jean Lowe Immortel", genero: "hombre", foto: "img/maison-alhambra-jean-lowe-immortel.jpg" },
+  { id: "maison-alhambra-jean-lowe-noir", marca: "Maison Alhambra", nombre: "Jean Lowe Noir", genero: "hombre", foto: "img/maison-alhambra-jean-lowe-noir.jpg" },
+  { id: "maison-alhambra-jorge-di-profumo-aqua", marca: "Maison Alhambra", nombre: "Jorge di Profumo Aqua", genero: "hombre", foto: "" },
+  { id: "maison-alhambra-la-rouge-baroque", marca: "Maison Alhambra", nombre: "La Rouge Baroque", genero: "unisex", foto: "" },
+  { id: "maison-alhambra-la-rouge-baroque-extreme", marca: "Maison Alhambra", nombre: "La Rouge Baroque Extreme", genero: "unisex", foto: "" },
+  { id: "maison-alhambra-la-voie", marca: "Maison Alhambra", nombre: "La Voie", genero: "unisex", foto: "img/maison-alhambra-la-voie.jpg" },
+  { id: "maison-alhambra-leonie", marca: "Maison Alhambra", nombre: "Leonie", genero: "mujer", foto: "img/maison-alhambra-leonie.jpg" },
+  { id: "maison-alhambra-leonie-intense", marca: "Maison Alhambra", nombre: "Leonie Intense", genero: "mujer", foto: "img/maison-alhambra-leonie-intense.jpg" },
+  { id: "maison-alhambra-papillon-d-or-femme", marca: "Maison Alhambra", nombre: "Papillon d'Or Femme", genero: "mujer", foto: "" },
+  { id: "maison-alhambra-philos-pura", marca: "Maison Alhambra", nombre: "Philos Pura", genero: "unisex", foto: "img/maison-alhambra-philos-pura.jpg" },
+  { id: "maison-alhambra-salvo-edp", marca: "Maison Alhambra", nombre: "Salvo EDP", genero: "hombre", foto: "img/maison-alhambra-salvo-edp.jpg" },
+  { id: "maison-alhambra-salvo-elixir", marca: "Maison Alhambra", nombre: "Salvo Elixir", genero: "hombre", foto: "img/maison-alhambra-salvo-elixir.jpg" },
+  { id: "maison-alhambra-salvo-intense", marca: "Maison Alhambra", nombre: "Salvo Intense", genero: "hombre", foto: "img/maison-alhambra-salvo-intense.jpg" },
+  { id: "maison-alhambra-sceptre-malachite-caja-verde", marca: "Maison Alhambra", nombre: "Sceptre Malachite (caja verde)", genero: "unisex", foto: "img/maison-alhambra-sceptre-malachite-caja-verde.jpg" },
+  { id: "maison-alhambra-yeah-man", marca: "Maison Alhambra", nombre: "Yeah! Man", genero: "hombre", foto: "img/maison-alhambra-yeah-man.jpg" },
+  { id: "maison-alhambra-your-touch-amber", marca: "Maison Alhambra", nombre: "Your Touch Amber", genero: "unisex", foto: "img/maison-alhambra-your-touch-amber.jpg" },
+  { id: "maison-alhambra-your-touch-leather", marca: "Maison Alhambra", nombre: "Your Touch Leather", genero: "unisex", foto: "" },
+
+  /* Montale */
+  { id: "montale-paris-tonka", marca: "Montale", nombre: "Paris Tonka", genero: "unisex", foto: "img/montale-paris-tonka.jpg" },
+
+  /* Al Wataniah */
+  { id: "al-wataniah-ameerati", marca: "Al Wataniah", nombre: "Ameerati", genero: "mujer", foto: "img/al-wataniah-ameerati.jpg" },
+
+  /* Asdaaf */
+  { id: "asdaaf-ameerat-al-arab-edp-caja-roja", marca: "Asdaaf", nombre: "Ameerat Al Arab EDP (caja roja)", genero: "mujer", foto: "img/asdaaf-ameerat-al-arab-edp-caja-roja.jpg" },
+  { id: "asdaaf-ameerat-al-arab-prive-rose-caja-rosa", marca: "Asdaaf", nombre: "Ameerat Al Arab Privé Rose (caja rosa)", genero: "mujer", foto: "img/asdaaf-ameerat-al-arab-prive-rose-caja-rosa.jpg" },
+
+  /* Otros */
+  { id: "otros-momento-riffs", marca: "Otros", nombre: "Momento Riffs", genero: "unisex", foto: "img/otros-momento-riffs.jpg" },
+
+  /* Dumont */
+  { id: "dumont-nitro-red", marca: "Dumont", nombre: "Nitro Red", genero: "hombre", foto: "img/dumont-nitro-red.jpg" },
+
+  /* Al Wataniah */
+  { id: "al-wataniah-sabah-al-ward", marca: "Al Wataniah", nombre: "Sabah Al Ward", genero: "mujer", foto: "img/al-wataniah-sabah-al-ward.jpg" },
+
+  /* Otros */
+  { id: "otros-stallion-valentino-uomo-intense", marca: "Otros", nombre: "Stallion Valentino Uomo Intense", genero: "hombre", foto: "" },
+
+  /* Emper */
+  { id: "emper-stallion-53", marca: "Emper", nombre: "Stallion 53", genero: "unisex", foto: "img/emper-stallion-53.jpg" },
+
+  /* Otros */
+  { id: "otros-zakat-world-cup-vip", marca: "Otros", nombre: "Zakat World Cup VIP", genero: "hombre", foto: "img/otros-zakat-world-cup-vip.jpg" },
+
+  /* Paco Rabanne */
+  { id: "paco-rabanne-invictus", marca: "Paco Rabanne", nombre: "Invictus", genero: "hombre", foto: "img/paco-rabanne-invictus.jpg" },
+  { id: "paco-rabanne-1-million", marca: "Paco Rabanne", nombre: "1 Million", genero: "hombre", foto: "img/paco-rabanne-1-million.jpg" },
+
+  /* Rasasi */
+  { id: "rasasi-hawas-black", marca: "Rasasi", nombre: "Hawas Black", genero: "hombre", foto: "img/rasasi-hawas-black.jpg" },
+  { id: "rasasi-hawas-diva", marca: "Rasasi", nombre: "Hawas Diva", genero: "mujer", foto: "" },
+  { id: "rasasi-hawas-eclat-femenino", marca: "Rasasi", nombre: "Hawas Éclat (femenino)", genero: "mujer", foto: "img/rasasi-hawas-eclat-femenino.jpg" },
+  { id: "rasasi-hawas-elixir", marca: "Rasasi", nombre: "Hawas Elixir", genero: "hombre", foto: "img/rasasi-hawas-elixir.jpg" },
+  { id: "rasasi-hawas-for-her", marca: "Rasasi", nombre: "Hawas For Her", genero: "mujer", foto: "img/rasasi-hawas-for-her.jpg" },
+  { id: "rasasi-hawas-for-him", marca: "Rasasi", nombre: "Hawas For Him", genero: "hombre", foto: "img/rasasi-hawas-for-him.jpg", destacado: true },
+  { id: "rasasi-hawas-for-him-fire", marca: "Rasasi", nombre: "Hawas For Him Fire", genero: "hombre", foto: "img/rasasi-hawas-for-him-fire.jpg" },
+  { id: "rasasi-hawas-ice", marca: "Rasasi", nombre: "Hawas Ice", genero: "hombre", foto: "img/rasasi-hawas-ice.jpg" },
+  { id: "rasasi-hawas-kobra", marca: "Rasasi", nombre: "Hawas Kobra", genero: "hombre", foto: "img/rasasi-hawas-kobra.jpg" },
+  { id: "rasasi-hawas-malibu", marca: "Rasasi", nombre: "Hawas Malibu", genero: "hombre", foto: "img/rasasi-hawas-malibu.jpg" },
+  { id: "rasasi-hawas-pink", marca: "Rasasi", nombre: "Hawas Pink", genero: "mujer", foto: "img/rasasi-hawas-pink.jpg" },
+  { id: "rasasi-hawas-tropical", marca: "Rasasi", nombre: "Hawas Tropical", genero: "hombre", foto: "img/rasasi-hawas-tropical.jpg" },
+  { id: "rasasi-hawas-verde", marca: "Rasasi", nombre: "Hawas Verde", genero: "hombre", foto: "img/rasasi-hawas-verde.jpg" },
+
+  /* Rayhaan */
+  { id: "rayhaan-aquatica", marca: "Rayhaan", nombre: "Aquatica", genero: "unisex", foto: "img/rayhaan-aquatica.jpg" },
+  { id: "rayhaan-corium", marca: "Rayhaan", nombre: "Corium", genero: "hombre", foto: "img/rayhaan-corium.jpg" },
+  { id: "rayhaan-crimson-caja-roja", marca: "Rayhaan", nombre: "Crimson (caja roja)", genero: "unisex", foto: "img/rayhaan-crimson-caja-roja.jpg" },
+  { id: "rayhaan-elixir", marca: "Rayhaan", nombre: "Elixir", genero: "hombre", foto: "img/rayhaan-elixir.jpg" },
+  { id: "rayhaan-italia", marca: "Rayhaan", nombre: "Italia", genero: "unisex", foto: "img/rayhaan-italia.jpg" },
+  { id: "rayhaan-jungle-vibe", marca: "Rayhaan", nombre: "Jungle Vibe", genero: "unisex", foto: "img/rayhaan-jungle-vibe.jpg" },
+  { id: "rayhaan-lion", marca: "Rayhaan", nombre: "Lion", genero: "hombre", foto: "img/rayhaan-lion.jpg" },
+  { id: "rayhaan-obsidian", marca: "Rayhaan", nombre: "Obsidian", genero: "hombre", foto: "img/rayhaan-obsidian.jpg" },
+  { id: "rayhaan-pacific", marca: "Rayhaan", nombre: "Pacific", genero: "hombre", foto: "img/rayhaan-pacific.jpg" },
+  { id: "rayhaan-wolf", marca: "Rayhaan", nombre: "Wolf", genero: "hombre", foto: "" },
+  { id: "rayhaan-terra", marca: "Rayhaan", nombre: "Terra", genero: "unisex", foto: "img/rayhaan-terra.jpg" },
+  { id: "rayhaan-tropical-vibe", marca: "Rayhaan", nombre: "Tropical Vibe", genero: "unisex", foto: "img/rayhaan-tropical-vibe.jpg" },
+
+  /* Valentino */
+  { id: "valentino-born-in-roma-uomo-intense", marca: "Valentino", nombre: "Born in Roma Uomo Intense", genero: "hombre", foto: "img/valentino-born-in-roma-uomo-intense.jpg" },
+
+  /* Versace */
+  { id: "versace-eros-edp", marca: "Versace", nombre: "Eros EDP", genero: "hombre", foto: "img/versace-eros-edp.jpg" },
+  { id: "versace-eros-flame-parfum", marca: "Versace", nombre: "Eros Flame Parfum", genero: "hombre", foto: "img/versace-eros-flame-parfum.jpg" },
+
+  /* Xerjoff */
+  { id: "xerjoff-erba-pura", marca: "Xerjoff", nombre: "Erba Pura", genero: "unisex", foto: "img/xerjoff-erba-pura.jpg" },
+
+  /* Yves Saint Laurent */
+  { id: "yves-saint-laurent-myslf", marca: "Yves Saint Laurent", nombre: "MYSLF", genero: "hombre", foto: "" },
+
+  /* ---------------- VARIOS (no son perfumes) ---------------- */
+  { id: "varios-auriculares-pro", categoria: "varios", marca: "Accesorios", nombre: "Auriculares inalámbricos tipo AirPods Pro", foto: "img/varios-auriculares-pro.jpg", destacado: true,
+    descripcion: "Auriculares inalámbricos con estuche de carga. Consultá modelos disponibles." },
+  { id: "varios-cargador-20w-cable-lightning", categoria: "varios", marca: "Accesorios", nombre: "Cargador 20W USB-C + cable a Lightning", foto: "img/varios-cargador-20w-cable-lightning.jpg", destacado: true,
+    descripcion: "Fuente de carga rápida 20W con salida USB-C y cable USB-C a Lightning de 1 metro." },
+  { id: "varios-bateria-magnetica", categoria: "varios", marca: "Accesorios", nombre: "Batería magnética para iPhone", foto: "img/varios-bateria-magnetica.jpg",
+    descripcion: "Batería portátil magnética que se pega atrás del iPhone. Consultá compatibilidad con tu modelo." },
+  { id: "varios-fundas-silicona-iphone", categoria: "varios", marca: "Accesorios", nombre: "Fundas de silicona para iPhone", foto: "img/varios-fundas-silicona-iphone.jpg", destacado: true,
+    descripcion: "Fundas de silicona en muchos colores. Consultá por tu modelo de iPhone y los colores disponibles." },
+  { id: "karseell-maca-power-collagen", categoria: "varios", marca: "Karseell", nombre: "Maca Power Collagen", foto: "" },
+  { id: "karseell-combo", categoria: "varios", marca: "Karseell", nombre: "Combo Karseell", foto: "" },
+];
+
+  </script>
+  <script>
+/* =========================================================
+   BOFFESTUDDIO · LÓGICA DE LA TIENDA
+   (no hace falta tocar este archivo para cargar productos;
+   eso se hace en productos.js)
+   ========================================================= */
+
+(function () {
+  "use strict";
+
+  const $ = (sel, ctx = document) => ctx.querySelector(sel);
+  const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+
+  /* ---------------- Utilidades ---------------- */
+
+  const formatoPrecio = (n) =>
+    n == null ? "Consultar precio" : "$ " + Number(n).toLocaleString("es-AR");
+
+  const nombreCompleto = (p) =>
+    [p.marca !== CONFIG.nombre && p.marca !== "Accesorios" ? p.marca : "", p.nombre, p.categoria === "perfumes" ? p.contenido : ""]
+      .filter(Boolean)
+      .join(" ");
+
+  const linkWhatsApp = (texto) =>
+    `https://wa.me/${CONFIG.whatsapp}${texto ? "?text=" + encodeURIComponent(texto) : ""}`;
+
+  const linkInstagram = () => `https://ig.me/m/${CONFIG.instagram}`;
+
+  // Valores por defecto: así en productos.js alcanza con marca, nombre, género y foto
+  PRODUCTOS.forEach((p) => {
+    p.categoria = p.categoria || "perfumes";
+    p.imagenes = p.imagenes || (p.foto ? [p.foto] : []);
+    if (p.precio === undefined) p.precio = null;
+    if (p.stock === undefined) p.stock = true;
+  });
+
+  const buscarProducto = (id) => PRODUCTOS.find((p) => p.id === id);
+
+  // Un producto entra en un filtro por su género (perfumes) o por su categoría
+  const cumpleFiltro = (p, filtro) =>
+    filtro === "todos" || p.genero === filtro || p.categoria === filtro;
+
+  const escapar = (s) =>
+    String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  /* ---------------- Dibujos de muestra (cuando no hay foto) ---------------- */
+
+  const ICONOS = {
+    hombre:
+      '<svg viewBox="0 0 64 64"><rect x="24" y="8" width="16" height="8" rx="1"/><path d="M28 16v5M36 16v5"/><rect x="14" y="21" width="36" height="36" rx="3"/><path d="M20 28v22"/></svg>',
+    mujer:
+      '<svg viewBox="0 0 64 64"><circle cx="32" cy="11" r="5"/><path d="M29 16v5h6v-5"/><path d="M18 21h28c3 0 5 2 5 5v20c0 7-6 12-12 12H25c-6 0-12-5-12-12V26c0-3 2-5 5-5z"/><path d="M20 30v14"/></svg>',
+    unisex:
+      '<svg viewBox="0 0 64 64"><rect x="26" y="5" width="12" height="10" rx="1"/><path d="M30 15v4M34 15v4"/><path d="M20 19h24v36a3 3 0 0 1-3 3H23a3 3 0 0 1-3-3z"/><path d="M26 26v24"/><path d="M20 38h24"/></svg>',
+    accesorios:
+      '<svg viewBox="0 0 64 64"><path d="M18 18a6 6 0 0 1 6 6v20a3 3 0 0 1-6 0V30a6 6 0 0 1 0-12z"/><path d="M34 14a6 6 0 0 1 6 6v20a3 3 0 0 1-6 0V26a6 6 0 0 1 0-12z" transform="translate(4 -2)"/><path d="M44 36h8l2 18H44z"/></svg>',
+    varios:
+      '<svg viewBox="0 0 64 64"><rect x="12" y="8" width="22" height="44" rx="4"/><path d="M19 13h8"/><path d="M42 24a6 6 0 0 1 6 6v18a3 3 0 0 1-6 0V36a6 6 0 0 1 0-12z"/><path d="M50 50h4"/></svg>',
+    celulares:
+      '<svg viewBox="0 0 64 64"><rect x="20" y="6" width="24" height="52" rx="4"/><path d="M28 11h8"/></svg>',
+  };
+
+  const iconoDe = (p) => ICONOS[p.genero] || ICONOS[p.categoria] || ICONOS.unisex;
+  const iconoFiltro = (id) => ICONOS[id] || ICONOS.unisex;
+
+  const imagenHTML = (p, i = 0) =>
+    p.imagenes && p.imagenes[i]
+      ? `<img src="${escapar(p.imagenes[i])}" alt="${escapar(nombreCompleto(p))}" loading="lazy">`
+      : `<div class="placeholder">${iconoDe(p)}</div>`;
+
+  /* ---------------- Carrito (se guarda en el navegador) ---------------- */
+
+  const CLAVE = "boffestuddio-carrito";
+  let carrito = [];
+  try {
+    carrito = JSON.parse(localStorage.getItem(CLAVE)) || [];
+  } catch (e) {
+    carrito = [];
+  }
+  carrito = carrito.filter((it) => buscarProducto(it.id));
+
+  const guardar = () => {
+    try {
+      localStorage.setItem(CLAVE, JSON.stringify(carrito));
+    } catch (e) { /* modo privado: el carrito vive solo en esta pestaña */ }
+    pintarCarrito();
+  };
+
+  const agregar = (id, cant = 1) => {
+    const it = carrito.find((x) => x.id === id);
+    if (it) it.cant += cant;
+    else carrito.push({ id, cant });
+    guardar();
+    aviso("Agregado al carrito");
+  };
+
+  const cambiarCantidad = (id, delta) => {
+    const it = carrito.find((x) => x.id === id);
+    if (!it) return;
+    it.cant += delta;
+    if (it.cant <= 0) carrito = carrito.filter((x) => x.id !== id);
+    guardar();
+  };
+
+  const total = () =>
+    carrito.reduce((s, it) => s + (buscarProducto(it.id).precio || 0) * it.cant, 0);
+
+  const hayPrecioAConsultar = () => carrito.some((it) => buscarProducto(it.id).precio == null);
+
+  /* ---------------- Tarjeta de producto ---------------- */
+
+  const tarjeta = (p) => `
+    <article class="tarjeta">
+      <a href="#p-${p.id}" class="tarjeta-img ${p.imagenes.length ? "con-foto" : ""}">
+        ${imagenHTML(p)}
+        ${!p.stock ? '<span class="etiqueta">Sin stock</span>' : ""}
+      </a>
+      <div class="tarjeta-cuerpo">
+        <p class="tarjeta-marca">${escapar(p.marca)}</p>
+        <h3 class="tarjeta-nombre"><a href="#p-${p.id}">${escapar(p.nombre)}</a></h3>
+        <p class="tarjeta-detalle">${escapar(p.contenido || "")}</p>
+        <p class="tarjeta-precio ${p.precio == null ? "a-consultar" : ""}">${formatoPrecio(p.precio)}</p>
+        ${
+          !p.stock
+            ? `<a class="btn btn-secundario btn-chico" target="_blank" rel="noopener" href="${linkWhatsApp(`Hola! Quería saber cuándo vuelve a entrar ${nombreCompleto(p)}.`)}">Avisame</a>`
+            : `<button class="btn btn-primario btn-chico" data-agregar="${escapar(p.id)}">Agregar al carrito</button>`
+        }
+      </div>
+    </article>`;
+
+  /* ---------------- Interfaz común (menú, carrito, links) ---------------- */
+
+  function montarComun() {
+    // Datos de contacto
+    $$("[data-wa-link]").forEach((a) => {
+      a.href = linkWhatsApp("Hola! Quería hacer una consulta.");
+      a.target = "_blank";
+      a.rel = "noopener";
+    });
+    $$("[data-ig-link]").forEach((a) => {
+      a.href = `https://instagram.com/${CONFIG.instagram}`;
+      a.target = "_blank";
+      a.rel = "noopener";
+    });
+    $$("[data-telefono]").forEach((el) => (el.textContent = CONFIG.telefonoVisible));
+    $$("[data-ig]").forEach((el) => (el.textContent = CONFIG.instagram));
+    $$("[data-ciudad]").forEach((el) => (el.textContent = CONFIG.ciudad));
+    $$("[data-anio]").forEach((el) => (el.textContent = new Date().getFullYear()));
+
+    // Menú móvil
+    const menu = $("[data-menu]");
+    $("[data-menu-toggle]")?.addEventListener("click", () => menu.classList.toggle("abierto"));
+    if (menu) $$("a", menu).forEach((a) => a.addEventListener("click", () => menu.classList.remove("abierto")));
+
+    // Panel del carrito + botón flotante de WhatsApp + aviso
+    document.body.insertAdjacentHTML(
+      "beforeend",
+      `
+      <div class="velo" data-velo></div>
+      <aside class="panel" data-panel aria-label="Carrito" aria-hidden="true">
+        <div class="panel-cabecera">
+          <h2>Tu pedido</h2>
+          <button class="btn-icono" data-carrito-cerrar aria-label="Cerrar carrito">
+            <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
+        <div class="panel-items" data-panel-items></div>
+        <div class="panel-pie" data-panel-pie>
+          <div class="panel-total"><span>Total</span><strong data-panel-total></strong></div>
+          <p class="panel-nota" data-panel-nota hidden>Te confirmamos precios y disponibilidad por mensaje.</p>
+
+          <label class="campo">
+            <span>Nombre</span>
+            <input type="text" data-cliente-nombre placeholder="Tu nombre">
+          </label>
+          <fieldset class="campo">
+            <legend>Forma de pago</legend>
+            <label class="opcion"><input type="radio" name="pago" value="Efectivo" checked> Efectivo</label>
+            <label class="opcion"><input type="radio" name="pago" value="Transferencia"> Transferencia</label>
+          </fieldset>
+          <fieldset class="campo">
+            <legend>Entrega</legend>
+            <label class="opcion"><input type="radio" name="entrega" value="La Plata" checked> En ${escapar(CONFIG.ciudad)}</label>
+            <label class="opcion"><input type="radio" name="entrega" value="Envío"> Envío al interior</label>
+          </fieldset>
+          <label class="campo" data-campo-localidad hidden>
+            <span>Localidad / provincia</span>
+            <input type="text" data-cliente-localidad placeholder="Ej: Rosario, Santa Fe">
+          </label>
+
+          <a class="btn btn-primario btn-ancho" data-enviar-wa href="#" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
+          <a class="btn btn-secundario btn-ancho" data-enviar-ig href="${linkInstagram()}" target="_blank" rel="noopener">Enviar por Instagram</a>
+          <p class="panel-nota">El costo de envío se coordina por mensaje.</p>
+        </div>
+      </aside>
+      <a class="wa-flotante" data-wa-link aria-label="WhatsApp" target="_blank" rel="noopener" href="${linkWhatsApp("Hola! Quería hacer una consulta.")}">
+        <svg viewBox="0 0 32 32"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.7c-2 0-4-.6-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.7 10.7 0 1 1 16 26.7zm5.9-8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1a8.8 8.8 0 0 1-4.4-3.8c-.3-.6.3-.5 1-1.7.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.6 5.7 5 2.1.9 2.9 1 4 .8.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.2-.3-.2-.6-.4z"/></svg>
+      </a>
+      <div class="aviso" data-aviso></div>`
+    );
+
+    const panel = $("[data-panel]");
+    const velo = $("[data-velo]");
+    const abrir = () => { panel.classList.add("abierto"); velo.classList.add("visible"); panel.setAttribute("aria-hidden", "false"); };
+    const cerrar = () => { panel.classList.remove("abierto"); velo.classList.remove("visible"); panel.setAttribute("aria-hidden", "true"); };
+    $$("[data-carrito-abrir]").forEach((b) => b.addEventListener("click", abrir));
+    $("[data-carrito-cerrar]").addEventListener("click", cerrar);
+    velo.addEventListener("click", cerrar);
+    document.addEventListener("keydown", (e) => e.key === "Escape" && cerrar());
+
+    // Localidad solo si elige envío
+    $$('input[name="entrega"]').forEach((r) =>
+      r.addEventListener("change", () => {
+        $("[data-campo-localidad]").hidden = $('input[name="entrega"]:checked').value !== "Envío";
+      })
+    );
+
+    // Botones "Agregar al carrito" (delegado, sirve para todas las grillas)
+    document.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-agregar]");
+      if (b) agregar(b.dataset.agregar);
+      const mas = e.target.closest("[data-mas]");
+      if (mas) cambiarCantidad(mas.dataset.mas, 1);
+      const menos = e.target.closest("[data-menos]");
+      if (menos) cambiarCantidad(menos.dataset.menos, -1);
+    });
+
+    // El link de WhatsApp lleva el pedido armado; se actualiza con cada cambio
+    const enviarWa = $("[data-enviar-wa]");
+    const actualizarWa = () => (enviarWa.href = linkWhatsApp(mensajePedido()));
+    $("[data-panel]").addEventListener("input", actualizarWa);
+    $("[data-panel]").addEventListener("change", actualizarWa);
+    enviarWa.addEventListener("pointerdown", actualizarWa);
+    enviarWa.addEventListener("focus", actualizarWa);
+    actualizarLinkPedido = actualizarWa;
+
+    // Instagram no permite precargar el texto: lo copiamos para que lo peguen
+    $("[data-enviar-ig]").addEventListener("click", () => {
+      navigator.clipboard
+        .writeText(mensajePedido())
+        .then(() => aviso("Pedido copiado. Pegalo en el chat de Instagram"))
+        .catch(() => aviso("Contanos tu pedido en el chat"));
+    });
+
+    pintarCarrito();
+  }
+
+  let actualizarLinkPedido = () => {};
+
+  function mensajePedido() {
+    const nombre = $("[data-cliente-nombre]").value.trim();
+    const pago = $('input[name="pago"]:checked').value;
+    const entrega = $('input[name="entrega"]:checked').value;
+    const localidad = $("[data-cliente-localidad]").value.trim();
+
+    const lineas = carrito.map((it) => {
+      const p = buscarProducto(it.id);
+      const sub = p.precio == null ? "a consultar" : formatoPrecio(p.precio * it.cant);
+      return `• ${it.cant} x ${nombreCompleto(p)} — ${sub}`;
+    });
+
+    return [
+      `¡Hola ${CONFIG.nombre}! Quiero hacer este pedido:`,
+      "",
+      ...lineas,
+      "",
+      total() > 0
+        ? `Total: ${formatoPrecio(total())}${hayPrecioAConsultar() ? " (+ productos a consultar)" : ""}`
+        : "¿Me pasás precio y disponibilidad?",
+      `Pago: ${pago}`,
+      `Entrega: ${entrega === "Envío" ? "Envío a " + (localidad || "(completar)") : "En " + CONFIG.ciudad}`,
+      nombre ? `Nombre: ${nombre}` : "",
+    ]
+      .filter((l, i, arr) => l !== "" || arr[i - 1] !== "")
+      .join("\n");
+  }
+
+  function pintarCarrito() {
+    const cantidad = carrito.reduce((s, it) => s + it.cant, 0);
+    $$("[data-carrito-contador]").forEach((el) => {
+      el.textContent = cantidad;
+      el.classList.toggle("visible", cantidad > 0);
+    });
+
+    const items = $("[data-panel-items]");
+    if (!items) return;
+    const pie = $("[data-panel-pie]");
+
+    if (!carrito.length) {
+      items.innerHTML = `
+        <div class="panel-vacio">
+          <div class="divisor"><span>✦</span></div>
+          <p>Tu carrito está vacío</p>
+          <a href="#inicio" class="btn btn-secundario btn-chico">Ver perfumes</a>
+        </div>`;
+      pie.hidden = true;
+      return;
+    }
+
+    pie.hidden = false;
+    actualizarLinkPedido();
+    items.innerHTML = carrito
+      .map((it) => {
+        const p = buscarProducto(it.id);
+        return `
+        <div class="item">
+          <a href="#p-${p.id}" class="item-img">${imagenHTML(p)}</a>
+          <div class="item-info">
+            <p class="tarjeta-marca">${escapar(p.marca)}</p>
+            <p class="item-nombre">${escapar(p.nombre)}</p>
+            <p class="item-precio">${formatoPrecio(p.precio)}</p>
+            <div class="cantidad cantidad-chica">
+              <button data-menos="${escapar(p.id)}" aria-label="Restar">−</button>
+              <span>${it.cant}</span>
+              <button data-mas="${escapar(p.id)}" aria-label="Sumar">+</button>
+            </div>
+          </div>
+        </div>`;
+      })
+      .join("");
+    $("[data-panel-total]").textContent = total() === 0 && hayPrecioAConsultar() ? "A consultar" : formatoPrecio(total());
+    $("[data-panel-nota]").hidden = !hayPrecioAConsultar();
+  }
+
+  let avisoTimer;
+  function aviso(texto) {
+    const el = $("[data-aviso]");
+    el.textContent = texto;
+    el.classList.add("visible");
+    clearTimeout(avisoTimer);
+    avisoTimer = setTimeout(() => el.classList.remove("visible"), 2400);
+  }
+
+  /* ---------------- Portada: las 3 opciones ---------------- */
+
+  function montarPortada() {
+    const opciones = $("[data-opciones]");
+    if (!opciones) return;
+    opciones.innerHTML = FILTROS
+      .map(
+        (f) => `
+        <a href="#${f.id}" class="portada-opcion">
+          <span class="portada-icono">${iconoFiltro(f.id)}</span>
+          <span class="portada-opcion-nombre">${escapar(f.nombre)}</span>
+          <span class="portada-opcion-bajada">${escapar(f.bajada || "")}</span>
+        </a>`
+      )
+      .join('<span class="portada-separador" aria-hidden="true"><span>✦</span></span>');
+  }
+
+  /* ---------------- Catálogo ---------------- */
+
+  let mostrarCatalogo = () => {};
+
+  function montarCatalogo() {
+    const grilla = $("[data-grilla-catalogo]");
+    if (!grilla) return;
+
+    const POR_PAGINA = 24;
+    const estado = { filtro: "todos", marca: "", busqueda: "", orden: "relevancia", limite: POR_PAGINA };
+
+    // Las marcas del desplegable dependen de la opción elegida
+    const selMarca = $("[data-marca]");
+    const pintarMarcas = () => {
+      const marcas = [...new Set(PRODUCTOS.filter((p) => cumpleFiltro(p, estado.filtro)).map((p) => p.marca))]
+        .sort((a, b) => a.localeCompare(b, "es"));
+      if (!marcas.includes(estado.marca)) estado.marca = "";
+      selMarca.innerHTML =
+        '<option value="">Todas las marcas</option>' +
+        marcas.map((m) => `<option value="${escapar(m)}" ${m === estado.marca ? "selected" : ""}>${escapar(m)}</option>`).join("");
+    };
+
+    const chips = $("[data-chips]");
+    const pintarChips = () => {
+      chips.innerHTML = [{ id: "todos", nombre: "Todos" }, ...FILTROS]
+        .map((f) => `<button class="chip ${estado.filtro === f.id ? "activo" : ""}" data-filtro="${f.id}">${escapar(f.nombre)}</button>`)
+        .join("");
+    };
+
+    const pintarTitulo = () => {
+      const f = FILTROS.find((x) => x.id === estado.filtro);
+      $("[data-catalogo-titulo]").textContent = f ? f.nombre : "Catálogo";
+      $("[data-catalogo-bajada]").textContent = f && f.bajada ? f.bajada : "Las mejores marcas al mejor precio";
+      document.title = `${f ? f.nombre : "Catálogo"} · ${CONFIG.nombre}`;
+    };
+
+    const pintarGrilla = () => {
+      const q = estado.busqueda.toLowerCase();
+      let lista = PRODUCTOS.filter(
+        (p) =>
+          cumpleFiltro(p, estado.filtro) &&
+          (!estado.marca || p.marca === estado.marca) &&
+          (!q || `${p.marca} ${p.nombre} ${p.familia || ""}`.toLowerCase().includes(q))
+      );
+      const precio = (p) => (p.precio == null ? Infinity : p.precio);
+      if (estado.orden === "precio-asc") lista.sort((a, b) => precio(a) - precio(b));
+      if (estado.orden === "precio-desc") lista.sort((a, b) => (b.precio || 0) - (a.precio || 0));
+      if (estado.orden === "nombre") lista.sort((a, b) => a.nombre.localeCompare(b.nombre, "es"));
+      if (estado.orden === "relevancia") lista.sort((a, b) => (b.stock - a.stock) || (!!b.destacado - !!a.destacado));
+
+      grilla.innerHTML = lista.slice(0, estado.limite).map(tarjeta).join("");
+      $("[data-vacio]").hidden = lista.length > 0;
+      const palabra = lista.some((p) => p.categoria !== "perfumes") ? ["producto", "productos"] : ["perfume", "perfumes"];
+      $("[data-cantidad-resultados]").textContent =
+        lista.length === 1 ? `1 ${palabra[0]}` : `${lista.length} ${palabra[1]}`;
+      const faltan = lista.length - estado.limite;
+      $("[data-ver-mas]").hidden = faltan <= 0;
+      $("[data-ver-mas]").textContent = `Ver más (${Math.max(faltan, 0)})`;
+    };
+
+    const elegirFiltro = (id) => {
+      estado.filtro = FILTROS.some((f) => f.id === id) ? id : "todos";
+      estado.limite = POR_PAGINA;
+      pintarMarcas();
+      try { history.replaceState(null, "", "#" + estado.filtro); } catch (e) { /* sin cambio de dirección */ }
+      pintarChips();
+      pintarTitulo();
+      pintarGrilla();
+    };
+
+    chips.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-filtro]");
+      if (b) elegirFiltro(b.dataset.filtro);
+    });
+    $("[data-buscador]").addEventListener("input", (e) => {
+      estado.busqueda = e.target.value;
+      estado.limite = POR_PAGINA;
+      pintarGrilla();
+    });
+    $("[data-orden]").addEventListener("change", (e) => {
+      estado.orden = e.target.value;
+      pintarGrilla();
+    });
+    selMarca.addEventListener("change", (e) => {
+      estado.marca = e.target.value;
+      estado.limite = POR_PAGINA;
+      pintarGrilla();
+    });
+    $("[data-ver-mas]").addEventListener("click", () => {
+      estado.limite += POR_PAGINA;
+      pintarGrilla();
+    });
+
+    mostrarCatalogo = elegirFiltro;
+  }
+
+  /* ---------------- Página de producto ---------------- */
+
+  function mostrarProducto(id) {
+    const cont = $("[data-producto]");
+    if (!cont) return;
+
+    const p = buscarProducto(id);
+    $("[data-relacionados-seccion]").hidden = !p;
+    if (!p) {
+      cont.innerHTML = `
+        <div class="no-encontrado">
+          <div class="divisor"><span>✦</span></div>
+          <h1>Producto no encontrado</h1>
+          <p>Puede que ya no esté disponible.</p>
+          <a href="#todos" class="btn btn-primario">Volver al catálogo</a>
+        </div>`;
+      $("[data-relacionados-seccion]").hidden = true;
+      return;
+    }
+
+    document.title = `${nombreCompleto(p)} · ${CONFIG.nombre}`;
+    const filtro = FILTROS.find((f) => f.id === (p.genero || p.categoria));
+    const imgs = p.imagenes && p.imagenes.length ? p.imagenes : [null];
+
+    const detalles = [
+      ["Marca", p.marca],
+      ["Contenido", p.contenido],
+      ["Concentración", p.concentracion],
+      ["Género", filtro && p.genero ? filtro.nombre : ""],
+      ["Familia olfativa", p.familia],
+    ].filter(([, v]) => v);
+
+    cont.innerHTML = `
+      <nav class="migas">
+        <a href="#inicio">Inicio</a><span>/</span>
+        ${filtro ? `<a href="#${filtro.id}">${escapar(filtro.nombre)}</a><span>/</span>` : ""}
+        <span>${escapar(p.nombre)}</span>
+      </nav>
+
+      <div class="producto-grid">
+        <div class="galeria">
+          <div class="galeria-principal marco" data-galeria-principal>${imagenHTML(p, 0)}</div>
+          ${
+            imgs.length > 1
+              ? `<div class="galeria-miniaturas">${imgs
+                  .map((_, i) => `<button class="miniatura ${i === 0 ? "activa" : ""}" data-mini="${i}">${imagenHTML(p, i)}</button>`)
+                  .join("")}</div>`
+              : ""
+          }
+        </div>
+
+        <div class="ficha">
+          <p class="eyebrow">${escapar(p.marca)}</p>
+          <h1 class="ficha-titulo">${escapar(p.nombre)}${p.categoria === "perfumes" && p.contenido ? ` <span>${escapar(p.contenido)}</span>` : ""}</h1>
+          <p class="ficha-precio">${formatoPrecio(p.precio)}</p>
+          <p class="ficha-stock ${p.stock ? "" : "sin"}">${p.stock ? "✦ En stock" : "Sin stock por el momento"}</p>
+
+          <div class="ficha-caja">
+            <div class="ficha-caja-fila">
+              <svg viewBox="0 0 48 48"><rect x="6" y="14" width="36" height="22" rx="2"/><circle cx="24" cy="25" r="5"/><path d="M10 10h28"/></svg>
+              <div><strong>Efectivo</strong><span>Pagás al recibir o retirar</span></div>
+            </div>
+            <div class="ficha-caja-fila">
+              <svg viewBox="0 0 48 48"><path d="M6 18 24 7l18 11z"/><path d="M8 18h32M10 40h28"/><path d="M13 22v14M20 22v14M28 22v14M35 22v14"/></svg>
+              <div><strong>Transferencia</strong><span>Te pasamos los datos por mensaje</span></div>
+            </div>
+            <div class="ficha-caja-fila">
+              <svg viewBox="0 0 48 48"><path d="M24 6 42 14v20L24 42 6 34V14z"/><path d="M6 14l18 8 18-8M24 22v20"/></svg>
+              <div><strong>Envíos a todo el país</strong><span>Consultá disponibilidad y costo · Estamos en ${escapar(CONFIG.ciudad)}</span></div>
+            </div>
+          </div>
+
+          ${
+            p.stock
+              ? `
+          <div class="ficha-compra">
+            <div class="cantidad">
+              <button data-cant-menos aria-label="Restar">−</button>
+              <span data-cant>1</span>
+              <button data-cant-mas aria-label="Sumar">+</button>
+            </div>
+            <button class="btn btn-primario btn-ancho" data-agregar-ficha>Agregar al carrito</button>
+          </div>`
+              : ""
+          }
+          <a class="btn btn-secundario btn-ancho" target="_blank" rel="noopener"
+             href="${linkWhatsApp(`Hola! Quería consultar por ${nombreCompleto(p)}.`)}">
+            ${p.stock ? "Consultar por WhatsApp" : "Avisame cuando entre"}
+          </a>
+
+          <div class="ficha-descripcion">
+            <div class="divisor"><span>✦</span></div>
+            ${p.descripcion ? `<h2>Descripción</h2><p>${escapar(p.descripcion)}</p>` : ""}
+
+            ${
+              p.notas
+                ? `
+            <h2>Notas olfativas</h2>
+            <ul class="notas">
+              <li><span>Salida</span>${escapar(p.notas.salida)}</li>
+              <li><span>Corazón</span>${escapar(p.notas.corazon)}</li>
+              <li><span>Fondo</span>${escapar(p.notas.fondo)}</li>
+            </ul>`
+                : ""
+            }
+
+            <h2>Detalles</h2>
+            <dl class="detalles">
+              ${detalles.map(([k, v]) => `<div><dt>${k}</dt><dd>${escapar(v)}</dd></div>`).join("")}
+            </dl>
+          </div>
+        </div>
+      </div>`;
+
+    // Galería
+    cont.onclick = (e) => {
+      const m = e.target.closest("[data-mini]");
+      if (!m) return;
+      $("[data-galeria-principal]").innerHTML = imagenHTML(p, Number(m.dataset.mini));
+      $$(".miniatura", cont).forEach((b) => b.classList.toggle("activa", b === m));
+    };
+
+    // Cantidad + agregar
+    let cant = 1;
+    const pintarCant = () => ($("[data-cant]").textContent = cant);
+    $("[data-cant-menos]")?.addEventListener("click", () => { cant = Math.max(1, cant - 1); pintarCant(); });
+    $("[data-cant-mas]")?.addEventListener("click", () => { cant += 1; pintarCant(); });
+    $("[data-agregar-ficha]")?.addEventListener("click", () => {
+      agregar(p.id, cant);
+      $("[data-carrito-abrir]").click();
+    });
+
+    // Relacionados: mismo género (o categoría), si no alcanza, otros destacados
+    // Primero de la misma marca, y que tengan foto
+    const rel = PRODUCTOS.filter((x) => x.id !== p.id && cumpleFiltro(x, p.genero || p.categoria)).sort(
+      (a, b) => (b.marca === p.marca) - (a.marca === p.marca) || b.imagenes.length - a.imagenes.length
+    );
+    const extra = PRODUCTOS.filter((x) => x.id !== p.id && !rel.includes(x) && x.destacado);
+    $("[data-grilla-relacionados]").innerHTML = [...rel, ...extra].slice(0, 4).map(tarjeta).join("");
+  }
+
+  /* ---------------- Arranque ---------------- */
+
+  function enrutar() {
+    let h = decodeURIComponent(location.hash.slice(1));
+    // Links viejos: #catalogo?filtro=hombre y #producto?id=xxx
+    const [ruta, consulta] = h.split("?");
+    const params = new URLSearchParams(consulta || "");
+    if (ruta === "catalogo") h = params.get("filtro") || "todos";
+    if (ruta === "producto" && params.get("id")) h = "p-" + params.get("id");
+    const esFiltro = h === "todos" || FILTROS.some((f) => f.id === h);
+    const idProducto = h.startsWith("p-") ? h.slice(2) : null;
+    // Anclas comunes (ej: #contacto) no cambian de vista, solo bajan
+    if (h && h !== "inicio" && !esFiltro && !idProducto) return;
+
+    const vista = esFiltro ? "catalogo" : idProducto ? "producto" : "inicio";
+    const enPortada = vista === "inicio";
+
+    $("#vista-portada").hidden = !enPortada;
+    $("#vista-tienda").hidden = enPortada;
+    document.body.classList.toggle("portada-body", enPortada);
+    $("[data-vista-catalogo]").hidden = vista !== "catalogo";
+    $("[data-vista-producto]").hidden = vista !== "producto";
+
+    $("[data-panel]").classList.remove("abierto");
+    $("[data-velo]").classList.remove("visible");
+    $("[data-menu]")?.classList.remove("abierto");
+
+    if (enPortada) document.title = `${CONFIG.nombre} · Perfumes`;
+    if (vista === "catalogo") mostrarCatalogo(h);
+    if (vista === "producto") mostrarProducto(idProducto);
+    window.scrollTo(0, 0);
+  }
+
+  montarPortada();
+  montarComun();
+  montarCatalogo();
+  window.addEventListener("hashchange", enrutar);
+  enrutar();
+})();
+
+  </script>
+</body>
+</html>
