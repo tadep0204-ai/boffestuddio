@@ -1,10 +1,12 @@
-program QuizFutbol;
+program Proyecto;
 
 uses crt;
 
 var
   opcion: char;
+  fin: string;
   puntos: integer;
+  salir: boolean;
 
 procedure Pausa;
 begin
@@ -18,7 +20,7 @@ procedure Titulo;
 begin
   clrscr;
   textcolor(lightgreen);
-  writeln('     _...----..._');
+  writeln('     _..---.._');
   writeln('   ,''    |    ''.');
   writeln('  /  \   |   /  \');
   writeln(' |----O--+--O----|');
@@ -98,10 +100,10 @@ begin
     1: begin textcolor(brown);      writeln('  Mas o menos...'); end;
     0: begin textcolor(lightred);   writeln('  No sacaste ninguna :('); end;
   end;
-  Pausa;
 end;
 
 begin
+  salir := false;
   repeat
     Titulo;
     textcolor(white);
@@ -158,11 +160,7 @@ begin
              Resultado(puntos);
            end;
 
-      '4': begin
-             textcolor(yellow);
-             writeln;
-             writeln('  Gracias por jugar!');
-           end;
+      '4': salir := true;
     else
       begin
         textcolor(lightred);
@@ -170,6 +168,21 @@ begin
         Pausa;
       end;
     end;
-  until opcion = '4';
+
+    { al terminar una tematica pregunta si quiere seguir }
+    if opcion in ['1', '2', '3'] then
+    begin
+      writeln;
+      textcolor(white);
+      write('ENTER para volver a jugar o D para terminar: ');
+      readln(fin);
+      if (fin = 'd') or (fin = 'D') then
+        salir := true;
+    end;
+  until salir;
+
+  textcolor(yellow);
+  writeln;
+  writeln('  Gracias por jugar!');
   textcolor(lightgray);
 end.
